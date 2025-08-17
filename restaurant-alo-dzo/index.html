@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà hàng Ấm Thực Alo Dzo 100 - Vĩnh Long</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="logo">
+                <a href="index.html" class="text-2xl font-bold text-red-600">Alo Dzo 100</a>
+            </div>
+            <div class="nav-links hidden md:flex space-x-6">
+                <a href="index.html" class="text-gray-700 hover:text-red-600">Trang chủ</a>
+                <a href="about.html" class="text-gray-700 hover:text-red-600">Giới thiệu</a>
+                <a href="menu.html" class="text-gray-700 hover:text-red-600">Thực đơn</a>
+                <a href="gallery.html" class="text-gray-700 hover:text-red-600">Album</a>
+                <a href="contact.html" class="text-gray-700 hover:text-red-600">Liên hệ</a>
+                <a href="booking.html" class="text-gray-700 hover:text-red-600">Đặt bàn</a>
+            </div>
+            <div class="auth-buttons hidden md:flex space-x-4">
+                <button class="login-btn px-4 py-2 text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white">
+                    Đăng nhập
+                </button>
+                <button class="register-btn px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                    Đăng ký
+                </button>
+            </div>
+            <button class="mobile-menu-btn md:hidden">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden md:hidden fixed w-full bg-white shadow-md z-40 top-16">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col space-y-4">
+                <a href="index.html" class="text-gray-700 hover:text-red-600">Trang chủ</a>
+                <a href="about.html" class="text-gray-700 hover:text-red-600">Giới thiệu</a>
+                <a href="menu.html" class="text-gray-700 hover:text-red-600">Thực đơn</a>
+                <a href="gallery.html" class="text-gray-700 hover:text-red-600">Album</a>
+                <a href="contact.html" class="text-gray-700 hover:text-red-600">Liên hệ</a>
+                <a href="booking.html" class="text-gray-700 hover:text-red-600">Đặt bàn</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Banner -->
+    <section class="hero mt-16">
+        <div class="banner-slider relative h-[500px] overflow-hidden">
+            <!-- Banner slides will be added here via JavaScript -->
+            <div class="slide absolute w-full h-full bg-cover bg-center" style="background-image: url('assets/images/banner1.jpg')">
+                <div class="absolute inset-0 bg-black opacity-40"></div>
+                <div class="container mx-auto px-4 h-full flex items-center relative z-10">
+                    <div class="text-white max-w-2xl">
+                        <h1 class="text-5xl font-bold mb-4">Chào mừng đến với Alo Dzo 100</h1>
+                        <p class="text-xl mb-8">Trải nghiệm ẩm thực độc đáo tại Vĩnh Long</p>
+                        <a href="booking.html" class="bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 transition duration-300">
+                            Đặt bàn ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes Section -->
+    <section class="featured-dishes py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Món Ăn Nổi Bật</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Featured dishes will be added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview Section -->
+    <section class="about-preview bg-gray-100 py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="about-image">
+                    <img src="assets/images/restaurant.jpg" alt="Nhà hàng Alo Dzo 100" class="rounded-lg shadow-lg">
+                </div>
+                <div class="about-content">
+                    <h2 class="text-3xl font-bold mb-6">Về Chúng Tôi</h2>
+                    <p class="text-gray-600 mb-6">
+                        Nhà hàng Ấm Thực Alo Dzo 100 tự hào là điểm đến ẩm thực hàng đầu tại Vĩnh Long, 
+                        mang đến cho quý khách những trải nghiệm ẩm thực độc đáo với không gian sang trọng 
+                        và dịch vụ chuyên nghiệp.
+                    </p>
+                    <a href="about.html" class="text-red-600 hover:text-red-700 font-semibold">
+                        Tìm hiểu thêm <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot -->
+    <div class="chatbot fixed bottom-4 right-4 z-50">
+        <button class="chatbot-toggle bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-red-700">
+            <i class="fas fa-comments text-2xl"></i>
+        </button>
+        <!-- Chatbot window will be added via JavaScript -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="footer-about">
+                    <h3 class="text-xl font-bold mb-4">Alo Dzo 100</h3>
+                    <p class="text-gray-400">
+                        Nhà hàng ẩm thực đẳng cấp tại Vĩnh Long
+                    </p>
+                </div>
+                <div class="footer-contact">
+                    <h3 class="text-xl font-bold mb-4">Liên Hệ</h3>
+                    <p class="text-gray-400">
+                        <i class="fas fa-map-marker-alt mr-2"></i> Địa chỉ: Vĩnh Long<br>
+                        <i class="fas fa-phone mr-2"></i> Điện thoại: xxx-xxx-xxxx<br>
+                        <i class="fas fa-envelope mr-2"></i> Email: info@alodzo100.com
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="text-xl font-bold mb-4">Liên Kết</h3>
+                    <ul class="text-gray-400">
+                        <li class="mb-2"><a href="about.html" class="hover:text-white">Về chúng tôi</a></li>
+                        <li class="mb-2"><a href="menu.html" class="hover:text-white">Thực đơn</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="hover:text-white">Album</a></li>
+                        <li class="mb-2"><a href="contact.html" class="hover:text-white">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 class="text-xl font-bold mb-4">Theo Dõi</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Alo Dzo 100. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
