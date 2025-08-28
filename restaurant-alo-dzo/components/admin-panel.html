@@ -1,0 +1,285 @@
+<!-- Admin Panel Component -->
+<div class="flex">
+    <!-- Sidebar -->
+    <div class="w-64 admin-sidebar bg-gray-800 text-white p-4">
+        <div class="flex items-center mb-8">
+            <i class="fas fa-utensils text-2xl mr-3"></i>
+            <h2 class="text-xl font-bold">Admin Panel</h2>
+        </div>
+        <nav class="space-y-2">
+            <button onclick="showAdminTab('dashboard')" class="admin-nav-item active w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-chart-line mr-2"></i>Dashboard
+            </button>
+            <button onclick="showAdminTab('foods')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-utensils mr-2"></i>Quản lý món ăn
+            </button>
+            <button onclick="showAdminTab('categories')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-list mr-2"></i>Danh mục
+            </button>
+            <button onclick="showAdminTab('bookings')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
+            </button>
+            <button onclick="showAdminTab('orders')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-shopping-cart mr-2"></i>Đơn hàng
+            </button>
+            <button onclick="showAdminTab('gallery')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-images mr-2"></i>Thư viện ảnh
+            </button>
+            <button onclick="showAdminTab('users')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-users mr-2"></i>Người dùng
+            </button>
+            <button onclick="showAdminTab('settings')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                <i class="fas fa-cog mr-2"></i>Cấu hình
+            </button>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 bg-gray-100">
+        <!-- Dashboard -->
+        <div id="admin-dashboard" class="admin-tab-content p-6">
+            <h1 class="text-3xl font-bold mb-6 brand-primary">Dashboard</h1>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-full">
+                            <i class="fas fa-shopping-cart text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-2xl font-bold">247</h3>
+                            <p class="text-gray-600">Đơn hàng hôm nay</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-green-100 rounded-full">
+                            <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-2xl font-bold">12.5M</h3>
+                            <p class="text-gray-600">Doanh thu hôm nay</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-yellow-100 rounded-full">
+                            <i class="fas fa-calendar-alt text-yellow-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-2xl font-bold">58</h3>
+                            <p class="text-gray-600">Đặt bàn hôm nay</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-purple-100 rounded-full">
+                            <i class="fas fa-users text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-2xl font-bold">1,234</h3>
+                            <p class="text-gray-600">Khách hàng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Doanh thu 7 ngày qua</h3>
+                    <div class="h-64 bg-gray-50 rounded flex items-center justify-center">
+                        <p class="text-gray-500">Biểu đồ doanh thu (Chart.js)</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Món ăn bán chạy</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span>Cơm tấm sườn nướng</span>
+                            <span class="font-bold">89 phần</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Bánh xèo miền Tây</span>
+                            <span class="font-bold">67 phần</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Hủ tiếu Nam Vang</span>
+                            <span class="font-bold">45 phần</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Foods Management -->
+        <div id="admin-foods" class="admin-tab-content hidden p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold brand-primary">Quản lý món ăn</h1>
+                <button onclick="openFoodForm()" class="bg-brand-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                    <i class="fas fa-plus mr-2"></i>Thêm món mới
+                </button>
+            </div>
+
+            <!-- Filter -->
+            <div class="bg-white rounded-lg shadow p-4 mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <select class="border border-gray-300 rounded px-3 py-2">
+                        <option>Tất cả danh mục</option>
+                        <option>Cơm tấm</option>
+                        <option>Bánh xèo</option>
+                        <option>Hủ tiếu</option>
+                        <option>Thức uống</option>
+                    </select>
+                    <input type="text" placeholder="Tìm kiếm món ăn..." class="border border-gray-300 rounded px-3 py-2 flex-1">
+                    <button class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Food List -->
+            <div class="bg-white rounded-lg shadow">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left">Ảnh</th>
+                            <th class="px-6 py-3 text-left">Tên món</th>
+                            <th class="px-6 py-3 text-left">Danh mục</th>
+                            <th class="px-6 py-3 text-left">Giá</th>
+                            <th class="px-6 py-3 text-left">Trạng thái</th>
+                            <th class="px-6 py-3 text-left">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4">
+                                <div class="w-16 h-16 bg-gray-200 rounded"></div>
+                            </td>
+                            <td class="px-6 py-4">Cơm tấm sườn nướng</td>
+                            <td class="px-6 py-4">Cơm tấm</td>
+                            <td class="px-6 py-4">65,000đ</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-sm">Hoạt động</span>
+                            </td>
+                            <td class="px-6 py-4 space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4">
+                                <div class="w-16 h-16 bg-gray-200 rounded"></div>
+                            </td>
+                            <td class="px-6 py-4">Bánh xèo miền Tây</td>
+                            <td class="px-6 py-4">Bánh xèo</td>
+                            <td class="px-6 py-4">45,000đ</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-sm">Hoạt động</span>
+                            </td>
+                            <td class="px-6 py-4 space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bookings Management -->
+        <div id="admin-bookings" class="admin-tab-content hidden p-6">
+            <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý đặt bàn</h1>
+            
+            <!-- Filter -->
+            <div class="bg-white rounded-lg shadow p-4 mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <input type="date" class="border border-gray-300 rounded px-3 py-2">
+                    <select class="border border-gray-300 rounded px-3 py-2">
+                        <option>Tất cả trạng thái</option>
+                        <option>Chờ xác nhận</option>
+                        <option>Đã xác nhận</option>
+                        <option>Hoàn thành</option>
+                        <option>Hủy</option>
+                    </select>
+                    <input type="text" placeholder="Tìm theo SĐT, tên..." class="border border-gray-300 rounded px-3 py-2 flex-1">
+                </div>
+            </div>
+
+            <!-- Booking List -->
+            <div class="bg-white rounded-lg shadow">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left">ID</th>
+                            <th class="px-6 py-3 text-left">Khách hàng</th>
+                            <th class="px-6 py-3 text-left">SĐT</th>
+                            <th class="px-6 py-3 text-left">Ngày/Giờ</th>
+                            <th class="px-6 py-3 text-left">Số khách</th>
+                            <th class="px-6 py-3 text-left">Trạng thái</th>
+                            <th class="px-6 py-3 text-left">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4">#001</td>
+                            <td class="px-6 py-4">Nguyễn Văn A</td>
+                            <td class="px-6 py-4">0123-456-789</td>
+                            <td class="px-6 py-4">15/12/2023 19:00</td>
+                            <td class="px-6 py-4">4 người</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded text-sm">Chờ xác nhận</span>
+                            </td>
+                            <td class="px-6 py-4 space-x-2">
+                                <button class="bg-green-500 text-white px-2 py-1 rounded text-sm">Xác nhận</button>
+                                <button class="bg-red-500 text-white px-2 py-1 rounded text-sm">Từ chối</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Other admin tabs placeholders -->
+        <div id="admin-categories" class="admin-tab-content hidden p-6">
+            <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý danh mục</h1>
+            <p class="text-gray-600">Tính năng quản lý danh mục...</p>
+        </div>
+
+        <div id="admin-orders" class="admin-tab-content hidden p-6">
+            <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý đơn hàng</h1>
+            <p class="text-gray-600">Tính năng quản lý đơn hàng...</p>
+        </div>
+
+        <div id="admin-gallery" class="admin-tab-content hidden p-6">
+            <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý thư viện ảnh</h1>
+            <p class="text-gray-600">Tính năng quản lý ảnh...</p>
+        </div>
+
+        <div id="admin-users" class="admin-tab-content hidden p-6">
+            <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý người dùng</h1>
+            <p class="text-gray-600">Tính năng quản lý người dùng...</p>
+        </div>
+
+        <div id="admin-settings" class="admin-tab-content hidden p-6">
+            <h1 class="text-3xl font-bold mb-6 brand-primary">Cấu hình hệ thống</h1>
+            <p class="text-gray-600">Tính năng cấu hình hệ thống...</p>
+        </div>
+    </div>
+</div>

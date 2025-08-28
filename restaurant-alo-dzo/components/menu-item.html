@@ -1,0 +1,197 @@
+<!-- Menu Item Component Template -->
+<!-- This is a reusable template for menu items -->
+<div class="menu-item {{category}} bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="{{price}}" data-rating="{{rating}}">
+    <div class="relative">
+        <div class="w-full h-48 bg-gradient-to-br {{gradient}} flex items-center justify-center">
+            <i class="{{icon}} text-6xl text-gray-300"></i>
+        </div>
+        <!-- Sale Badge (conditional) -->
+        {{#if salePercent}}
+        <div class="absolute top-2 left-2 badge-sale text-white px-2 py-1 rounded-lg text-xs font-bold">
+            -{{salePercent}}%
+        </div>
+        {{/if}}
+        <!-- Hot Badge (conditional) -->
+        {{#if isHot}}
+        <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
+            HOT
+        </div>
+        {{/if}}
+        <!-- New Badge (conditional) -->
+        {{#if isNew}}
+        <div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
+            MỚI
+        </div>
+        {{/if}}
+        <!-- Favorite Button (conditional) -->
+        {{#if showFavorite}}
+        <div class="absolute top-2 right-2 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center">
+            <i class="fas fa-heart text-sm"></i>
+        </div>
+        {{/if}}
+    </div>
+    <div class="p-4">
+        <h3 class="font-semibold mb-2">{{name}}</h3>
+        {{#if description}}
+        <p class="text-gray-600 text-sm mb-2">{{description}}</p>
+        {{/if}}
+        <div class="flex items-center mb-2">
+            <div class="star-rating">
+                {{#each stars}}
+                <i class="{{this}}"></i>
+                {{/each}}
+            </div>
+            <span class="text-sm text-gray-600 ml-2">({{rating}}) {{reviewCount}} đánh giá</span>
+        </div>
+        <div class="flex items-center justify-between">
+            <div>
+                <span class="text-red-500 font-bold">{{price}}đ</span>
+                {{#if originalPrice}}
+                <span class="text-gray-400 line-through ml-2">{{originalPrice}}đ</span>
+                {{/if}}
+            </div>
+            <button onclick="{{action}}" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                {{buttonText}}
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Template Function -->
+<script>
+// Function to create menu item from data
+function createMenuItem(data) {
+    const template = `
+        <div class="menu-item ${data.category} bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="${data.price}" data-rating="${data.rating}">
+            <div class="relative">
+                <div class="w-full h-48 bg-gradient-to-br ${data.gradient} flex items-center justify-center">
+                    <i class="${data.icon} text-6xl text-gray-300"></i>
+                </div>
+                ${data.salePercent ? `<div class="absolute top-2 left-2 badge-sale text-white px-2 py-1 rounded-lg text-xs font-bold">-${data.salePercent}%</div>` : ''}
+                ${data.isHot ? '<div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-bold">HOT</div>' : ''}
+                ${data.isNew ? '<div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-lg text-xs font-bold">MỚI</div>' : ''}
+                ${data.showFavorite ? '<div class="absolute top-2 right-2 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center"><i class="fas fa-heart text-sm"></i></div>' : ''}
+            </div>
+            <div class="p-4">
+                <h3 class="font-semibold mb-2">${data.name}</h3>
+                ${data.description ? `<p class="text-gray-600 text-sm mb-2">${data.description}</p>` : ''}
+                <div class="flex items-center mb-2">
+                    <div class="star-rating">
+                        ${generateStars(data.rating)}
+                    </div>
+                    <span class="text-sm text-gray-600 ml-2">(${data.rating}) ${data.reviewCount} đánh giá</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-red-500 font-bold">${data.price.toLocaleString()}đ</span>
+                        ${data.originalPrice ? `<span class="text-gray-400 line-through ml-2">${data.originalPrice.toLocaleString()}đ</span>` : ''}
+                    </div>
+                    <button onclick="${data.action}" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                        ${data.buttonText}
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    return template;
+}
+
+// Helper function to generate star ratings
+function generateStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    
+    let stars = '';
+    
+    // Full stars
+    for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="fas fa-star"></i>';
+    }
+    
+    // Half star
+    if (hasHalfStar) {
+        stars += '<i class="fas fa-star-half-alt"></i>';
+    }
+    
+    // Empty stars
+    for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="far fa-star"></i>';
+    }
+    
+    return stars;
+}
+
+// Sample menu items data
+const menuItemsData = [
+    {
+        id: 'com-tam-suon',
+        name: 'Cơm tấm sườn nướng',
+        description: 'Cơm tấm thơm, sườn nướng mềm, chả trứng, bì',
+        category: 'com-tam',
+        price: 65000,
+        originalPrice: 80000,
+        rating: 4.5,
+        reviewCount: 127,
+        icon: 'fas fa-bowl-rice',
+        gradient: 'from-yellow-100 to-orange-100',
+        salePercent: 20,
+        showFavorite: true,
+        action: "openFoodModal('com-tam-suon')",
+        buttonText: 'Chi tiết'
+    },
+    {
+        id: 'banh-xeo',
+        name: 'Bánh xèo miền Tây',
+        description: 'Bánh xèo giòn, tôm thịt, giá đỗ, rau sống',
+        category: 'banh-xeo',
+        price: 45000,
+        rating: 5.0,
+        reviewCount: 89,
+        icon: 'fas fa-cookie-bite',
+        gradient: 'from-green-100 to-yellow-100',
+        isHot: true,
+        action: "openFoodModal('banh-xeo')",
+        buttonText: 'Chi tiết'
+    },
+    {
+        id: 'hu-tieu',
+        name: 'Hủ tiếu Nam Vang',
+        description: 'Hủ tiếu tôm thịt, gan, tim, nước dùng ngọt',
+        category: 'hu-tieu',
+        price: 38000,
+        rating: 4.4,
+        reviewCount: 56,
+        icon: 'fas fa-bowl-food',
+        gradient: 'from-blue-100 to-purple-100',
+        action: "openFoodModal('hu-tieu')",
+        buttonText: 'Chi tiết'
+    },
+    {
+        id: 'nuoc-mia',
+        name: 'Nước mía tươi',
+        description: 'Nước mía tươi nguyên chất, mát lạnh',
+        category: 'nuoc-uong',
+        price: 15000,
+        rating: 4.8,
+        reviewCount: 23,
+        icon: 'fas fa-glass-water',
+        gradient: 'from-pink-100 to-red-100',
+        isNew: true,
+        action: "openFoodModal('nuoc-mia')",
+        buttonText: 'Chi tiết'
+    }
+];
+
+// Function to render menu items
+function renderMenuItems(items = menuItemsData) {
+    const menuGrid = document.getElementById('menuGrid');
+    if (!menuGrid) return;
+    
+    menuGrid.innerHTML = '';
+    items.forEach(item => {
+        const menuItemHTML = createMenuItem(item);
+        menuGrid.insertAdjacentHTML('beforeend', menuItemHTML);
+    });
+}
+</script>

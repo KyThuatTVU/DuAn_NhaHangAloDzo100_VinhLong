@@ -1,0 +1,211 @@
+<!-- Modal Component Templates -->
+
+<!-- Food Detail Modal -->
+<div id="foodModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 id="foodModalTitle" class="text-2xl font-bold">Chi tiết món ăn</h2>
+                    <button onclick="closeFoodModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Food Image -->
+                    <div class="w-full h-64 bg-gradient-to-br from-yellow-100 to-orange-100 rounded-lg flex items-center justify-center">
+                        <i id="foodModalIcon" class="fas fa-utensils text-8xl text-gray-300"></i>
+                    </div>
+                    
+                    <!-- Food Details -->
+                    <div>
+                        <div class="mb-4">
+                            <h3 id="foodModalName" class="text-xl font-semibold mb-2">Tên món ăn</h3>
+                            <p id="foodModalDescription" class="text-gray-600 mb-3">Mô tả món ăn...</p>
+                            
+                            <div class="flex items-center mb-3">
+                                <div id="foodModalRating" class="star-rating mr-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span id="foodModalReviews" class="text-sm text-gray-600">(4.5) 127 đánh giá</span>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <span id="foodModalPrice" class="text-2xl font-bold text-red-500">65.000đ</span>
+                                <span id="foodModalOriginalPrice" class="text-gray-400 line-through ml-2">80.000đ</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Quantity Selector -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Số lượng:</label>
+                            <div class="flex items-center space-x-3">
+                                <button onclick="decreaseQuantity()" class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">-</button>
+                                <span id="modalQuantity" class="text-lg font-semibold">1</span>
+                                <button onclick="increaseQuantity()" class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Add to Cart Button -->
+                        <button id="addToCartBtn" onclick="addToCartFromModal()" class="w-full bg-brand-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Additional Info -->
+                <div class="mt-6 border-t pt-6">
+                    <h4 class="font-semibold mb-3">Thông tin bổ sung:</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span class="font-medium">Thời gian chuẩn bị:</span>
+                            <span id="foodModalPrepTime" class="text-gray-600">15-20 phút</span>
+                        </div>
+                        <div>
+                            <span class="font-medium">Phù hợp cho:</span>
+                            <span id="foodModalSuitableFor" class="text-gray-600">2-3 người</span>
+                        </div>
+                        <div>
+                            <span class="font-medium">Độ cay:</span>
+                            <span id="foodModalSpiceLevel" class="text-gray-600">Nhẹ</span>
+                        </div>
+                        <div>
+                            <span class="font-medium">Loại:</span>
+                            <span id="foodModalType" class="text-gray-600">Món chính</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Auth Modal -->
+<div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold">Đăng nhập / Đăng ký</h2>
+                    <button onclick="toggleAuth()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <button id="loginTab" onclick="showAuthTab('login')" class="auth-tab active w-1/2 py-2 text-center border-b-2 border-brand-primary text-brand-primary font-semibold">
+                        Đăng nhập
+                    </button>
+                    <button id="registerTab" onclick="showAuthTab('register')" class="auth-tab w-1/2 py-2 text-center border-b-2 border-gray-200 text-gray-500">
+                        Đăng ký
+                    </button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="loginForm" class="auth-form">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Email hoặc số điện thoại</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Mật khẩu</label>
+                            <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span class="text-sm">Ghi nhớ đăng nhập</span>
+                            </label>
+                            <a href="#" class="text-sm text-brand-primary hover:underline">Quên mật khẩu?</a>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-600">
+                            Đăng nhập
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="registerForm" class="auth-form hidden">
+                    <form onsubmit="handleRegister(event)">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Họ và tên</label>
+                            <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Số điện thoại</label>
+                            <input type="tel" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Mật khẩu</label>
+                            <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Xác nhận mật khẩu</label>
+                            <input type="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" required class="mr-2">
+                                <span class="text-sm">Tôi đồng ý với <a href="#" class="text-brand-primary hover:underline">điều khoản sử dụng</a></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-600">
+                            Đăng ký
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-sm text-gray-600">Hoặc đăng nhập bằng</p>
+                    <div class="flex justify-center space-x-4 mt-2">
+                        <button class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
+                            <i class="fab fa-google"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox Modal for Album -->
+<div id="lightboxModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="relative max-w-4xl w-full">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="bg-white rounded-lg overflow-hidden">
+                <div id="lightboxContent" class="w-full h-96 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <i class="fas fa-image text-8xl text-gray-400"></i>
+                </div>
+                <div class="p-4">
+                    <h3 id="lightboxTitle" class="text-lg font-semibold">Tiêu đề ảnh</h3>
+                    <p id="lightboxDescription" class="text-gray-600">Mô tả ảnh...</p>
+                </div>
+            </div>
+            
+            <!-- Navigation arrows -->
+            <button onclick="previousImage()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-gray-300">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button onclick="nextImage()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-gray-300">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
