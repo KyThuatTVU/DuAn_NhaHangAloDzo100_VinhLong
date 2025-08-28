@@ -1,1562 +1,1853 @@
+
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ẩm thực Phương Nam - Restaurant & Delivery</title>
+    <title>Ẩm Thực Phương Nam - Restaurant & Food Delivery</title>
+    <meta name="description" content="Nhà hàng Ẩm Thực Phương Nam - Đặc sản miền Nam, đặt bàn online, giao hàng tận nơi">
+    <meta property="og:title" content="Ẩm Thực Phương Nam - Restaurant & Food Delivery">
+    <meta property="og:description" content="Trải nghiệm hương vị đặc sản miền Nam authentic tại Ẩm Thực Phương Nam">
+    <meta property="og:type" content="restaurant">
+    
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/enhanced-ui.css">
-    <!-- Swiper JS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        
+        .brand-primary { color: #0A4A7A; }
+        .bg-brand-primary { background-color: #0A4A7A; }
+        .border-brand-primary { border-color: #0A4A7A; }
+        
+        .brand-warm { color: #8B4513; }
+        .bg-brand-warm { background-color: #8B4513; }
+        
+        .diamond-rounded { border-radius: 1rem 0.25rem 1rem 0.25rem; }
+        
+        .slide-enter {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .slide-enter-active {
+            transform: translateX(0);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hover-scale {
+            transition: transform 0.2s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(45deg, rgba(10,74,122,0.9), rgba(139,69,19,0.8));
+        }
+        
+        .masonry {
+            column-count: 3;
+            column-gap: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .masonry { column-count: 2; }
+        }
+        
+        @media (max-width: 640px) {
+            .masonry { column-count: 1; }
+        }
+        
+        .masonry img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            break-inside: avoid;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .cart-slide {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .cart-slide.open {
+            transform: translateX(0);
+        }
+        
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .section-hidden {
+            display: none;
+        }
+        
+        .section-visible {
+            display: block;
+        }
+        
+        .nav-active {
+            background-color: #0A4A7A;
+            color: white;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .admin-sidebar {
+            min-height: 100vh;
+        }
+        
+        .chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chatbot-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            z-index: 999;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+        
+        .chatbot-window.open {
+            transform: scale(1);
+        }
+        
+        .star-rating {
+            color: #FFC107;
+        }
+        
+        .badge-sale {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-
-<!-- Announcement Bar -->
-<div class="bg-red-600 text-white py-2 px-4">
-    <div class="container mx-auto flex justify-between items-center">
-        <p class="text-sm"><i class="fas fa-clock mr-2"></i>Mở cửa: 07:00 - 22:00</p>
-        <div class="flex space-x-4">
-            <a href="tel:+84xxxxxxxx" class="text-sm hover:text-yellow-200">
-                <i class="fas fa-phone mr-1"></i>Hotline: 0xxx.xxx.xxx
-            </a>
-            <a href="#" class="text-sm hover:text-yellow-200">
-                <i class="fas fa-map-marker-alt mr-1"></i>Tìm đường đến nhà hàng
-            </a>
+    <!-- Top Bar -->
+    <div class="bg-brand-primary text-white py-2 text-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span><i class="fas fa-phone mr-1"></i> 0123-456-789</span>
+                    <span><i class="fas fa-envelope mr-1"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="026b6c646d42636f766a7761726a776d6c656c636f2c746c">[email&#160;protected]</a></span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span>Miễn phí giao hàng cho đơn từ 200k</span>
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Header Navigation -->
-<header class="sticky-header bg-white shadow-lg">
-    <div class="container mx-auto px-4 py-4">
-        <!-- Top Header -->
-        <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-4">
-                <i class="fas fa-utensils text-3xl text-red-600"></i>
-                <h1 class="text-2xl font-bold text-gray-800">Ẩm thực Phương Nam</h1>
-            </div>
-            
-            <!-- Search Bar -->
-            <div class="hidden md:flex flex-1 max-w-2xl mx-8">
-                <div class="search-bar w-full relative">
-                    <input type="text" 
-                           placeholder="Tìm kiếm món ăn..." 
-                           class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-red-500">
-                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-600">
-                        <i class="fas fa-search"></i>
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-utensils text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold brand-primary">Ẩm Thực Phương Nam</h1>
+                        <p class="text-sm text-gray-600">Đặc sản miền Nam</p>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-2xl mx-8">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            placeholder="Tìm kiếm món ăn, combo, thức uống..."
+                            class="w-full py-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary"
+                        >
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </button>
+                        <!-- Search Suggestions -->
+                        <div id="searchSuggestions" class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 hidden">
+                            <div class="p-2">
+                                <div class="text-xs text-gray-500 mb-2">Gợi ý tìm kiếm:</div>
+                                <div class="space-y-1">
+                                    <div class="p-2 hover:bg-gray-100 cursor-pointer rounded">Bánh xèo miền Tây</div>
+                                    <div class="p-2 hover:bg-gray-100 cursor-pointer rounded">Cơm tấm sườn nướng</div>
+                                    <div class="p-2 hover:bg-gray-100 cursor-pointer rounded">Hủ tiếu Nam Vang</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Menu -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleAuth()" class="flex items-center text-gray-700 hover:text-brand-primary">
+                        <i class="fas fa-user mr-2"></i>
+                        <span class="hidden md:block">Đăng nhập</span>
+                    </button>
+                    
+                    <button onclick="toggleCart()" class="relative flex items-center text-gray-700 hover:text-brand-primary">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        <span class="hidden md:block">Giỏ hàng</span>
+                        <span id="cartBadge" class="absolute -top-2 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
                     </button>
                 </div>
             </div>
-            
-            <!-- User Actions -->
-            <div class="flex items-center space-x-6">
-                <div class="relative group">
-                    <button id="cartBtn" class="relative p-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition duration-300">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cartCount" class="cart-badge absolute -top-2 -right-2 bg-yellow-500 text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">0</span>
+
+            <!-- Navigation -->
+            <nav class="border-t border-gray-200">
+                <div class="flex space-x-8 py-4">
+                    <button onclick="showSection('home')" class="nav-item nav-active px-3 py-2 rounded font-medium transition-colors">
+                        <i class="fas fa-home mr-2"></i>Trang chủ
                     </button>
-                    <!-- Mini Cart Preview -->
-                    <div class="hidden group-hover:block absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl z-50 animate-fade-in">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold mb-2">Giỏ hàng</h3>
-                            <div class="max-h-60 overflow-y-auto">
-                                <!-- Cart items will be dynamically added here -->
-                                <p class="text-gray-500 text-center py-4">Giỏ hàng trống</p>
+                    <button onclick="showSection('about')" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-info-circle mr-2"></i>Giới thiệu
+                    </button>
+                    <button onclick="showSection('menu')" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-utensils mr-2"></i>Thực đơn
+                    </button>
+                    <button onclick="showSection('album')" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-images mr-2"></i>Album
+                    </button>
+                    <button onclick="showSection('booking')" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
+                    </button>
+                    <button onclick="showSection('contact')" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-phone mr-2"></i>Liên hệ
+                    </button>
+                    <button onclick="showSection('admin')" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-cog mr-2"></i>Admin
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home-section" class="section-visible">
+            <!-- Hero Banner -->
+            <div class="relative h-96 overflow-hidden">
+                <div class="absolute inset-0 gradient-overlay"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-white text-center">
+                    <div class="fade-in">
+                        <h1 class="text-5xl font-bold mb-4">Ẩm Thực Phương Nam</h1>
+                        <p class="text-xl mb-8">Hương vị đặc sản miền Nam - Giao hàng tận nơi</p>
+                        <div class="space-x-4">
+                            <button onclick="showSection('menu')" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale">
+                                Xem thực đơn
+                            </button>
+                            <button onclick="showSection('booking')" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors">
+                                Đặt bàn ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Indicators -->
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+                    <div class="w-3 h-3 bg-white rounded-full"></div>
+                    <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+                </div>
+            </div>
+
+            <!-- Quick Categories -->
+            <div class="container mx-auto px-4 py-12">
+                <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Danh mục nổi bật</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center group cursor-pointer" onclick="filterMenu('com-tam')">
+                        <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-bowl-rice text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold">Cơm tấm</h3>
+                    </div>
+                    <div class="text-center group cursor-pointer" onclick="filterMenu('banh-xeo')">
+                        <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-cookie-bite text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold">Bánh xèo</h3>
+                    </div>
+                    <div class="text-center group cursor-pointer" onclick="filterMenu('hu-tieu')">
+                        <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-mortar-pestle text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold">Hủ tiếu</h3>
+                    </div>
+                    <div class="text-center group cursor-pointer" onclick="filterMenu('nuoc-uong')">
+                        <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-glass-cheers text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold">Thức uống</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flash Sale -->
+            <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white py-8">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="fas fa-bolt text-yellow-300 text-2xl mr-3 pulse-animation"></i>
+                            <h2 class="text-2xl font-bold">Flash Sale - Giờ vàng</h2>
+                            <div class="ml-6 flex items-center space-x-2">
+                                <span>Kết thúc sau:</span>
+                                <div class="bg-white text-red-500 px-2 py-1 rounded font-bold">02</div>
+                                <span>:</span>
+                                <div class="bg-white text-red-500 px-2 py-1 rounded font-bold">35</div>
+                                <span>:</span>
+                                <div class="bg-white text-red-500 px-2 py-1 rounded font-bold">42</div>
                             </div>
-                            <div class="border-t mt-4 pt-4">
-                                <div class="flex justify-between mb-4">
-                                    <span class="font-semibold">Tổng cộng:</span>
-                                    <span class="font-bold text-red-600">0₫</span>
+                        </div>
+                        <button onclick="showSection('menu')" class="bg-white text-red-500 px-6 py-2 rounded-lg font-semibold hover-scale">
+                            Xem tất cả
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Sellers -->
+            <div class="container mx-auto px-4 py-12">
+                <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Món ăn bán chạy</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
+                                <i class="fas fa-utensils text-6xl text-gray-300"></i>
+                            </div>
+                            <div class="absolute top-2 left-2 badge-sale text-white px-2 py-1 rounded-lg text-xs font-bold">
+                                -20%
+                            </div>
+                            <div class="absolute top-2 right-2 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center">
+                                <i class="fas fa-heart text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Cơm tấm sườn nướng</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
                                 </div>
-                                <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300">
-                                    Thanh toán
+                                <span class="text-sm text-gray-600 ml-2">(4.5) 127 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-red-500 font-bold">65.000đ</span>
+                                    <span class="text-gray-400 line-through ml-2">80.000đ</span>
+                                </div>
+                                <button onclick="addToCart('com-tam-suon', 65000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-plus mr-1"></i>Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-green-100 to-yellow-100 flex items-center justify-center">
+                                <i class="fas fa-leaf text-6xl text-gray-300"></i>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
+                                HOT
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Bánh xèo miền Tây</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(5.0) 89 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-red-500 font-bold">45.000đ</span>
+                                </div>
+                                <button onclick="addToCart('banh-xeo', 45000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-plus mr-1"></i>Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                                <i class="fas fa-bowl-food text-6xl text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Hủ tiếu Nam Vang</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.2) 56 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-red-500 font-bold">38.000đ</span>
+                                </div>
+                                <button onclick="addToCart('hu-tieu', 38000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-plus mr-1"></i>Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-pink-100 to-red-100 flex items-center justify-center">
+                                <i class="fas fa-glass-water text-6xl text-gray-300"></i>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
+                                MỚI
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Nước mía tươi</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(5.0) 23 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-red-500 font-bold">15.000đ</span>
+                                </div>
+                                <button onclick="addToCart('nuoc-mia', 15000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-plus mr-1"></i>Thêm
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="flex items-center space-x-4">
-                    <button id="loginBtn" class="flex items-center space-x-2 text-gray-700 hover:text-red-600">
-                        <i class="fas fa-user"></i>
-                        <span class="hidden md:inline">Đăng nhập</span>
-                    </button>
-                    <button id="adminBtn" class="hidden md:flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Admin</span>
-                    </button>
-                </div>
             </div>
-        </div>
-        
-        <!-- Bottom Header - Navigation -->
-        <nav class="hidden md:flex items-center justify-between border-t border-gray-200 pt-4">
-            <div class="flex space-x-8">
-                <a href="#" class="nav-link group relative text-gray-700 hover:text-red-600 font-medium py-2" data-page="home">
-                    Trang chủ
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-                </a>
-                <a href="#" class="nav-link group relative text-gray-700 hover:text-red-600 font-medium py-2" data-page="about">
-                    Giới thiệu
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-                </a>
-                <a href="#" class="nav-link group relative text-gray-700 hover:text-red-600 font-medium py-2" data-page="menu">
-                    Thực đơn
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-                </a>
-                <a href="#" class="nav-link group relative text-gray-700 hover:text-red-600 font-medium py-2" data-page="gallery">
-                    Album
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-                </a>
-                <a href="#" class="nav-link group relative text-gray-700 hover:text-red-600 font-medium py-2" data-page="booking">
-                    Đặt bàn
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-                </a>
-                <a href="#" class="nav-link group relative text-gray-700 hover:text-red-600 font-medium py-2" data-page="contact">
-                    Liên hệ
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-                </a>
-            </div>
-            
-            <!-- Quick Order Button -->
-            <button class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-300 flex items-center space-x-2">
-                <i class="fas fa-bolt"></i>
-                <span>Đặt món nhanh</span>
-            </button>
-        </nav>
-        
-        <!-- Mobile Menu Button -->
-        <button class="md:hidden absolute right-4 top-4 text-gray-500 hover:text-red-600">
-            <i class="fas fa-bars text-2xl"></i>
-        </button>
-    </div>
-</header>
 
-<!-- Main Content Container -->
-<main id="mainContent">
-
-<!-- Home Page -->
-<div id="homePage" class="page-section">
-    <!-- Hero Banner -->
-    <section class="hero-banner text-white py-20">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-5xl font-bold mb-4">Chào mừng đến với Ẩm thực Phương Nam</h2>
-            <p class="text-xl mb-8">Hương vị đậm đà miền Nam Việt Nam</p>
-            <div class="space-x-4">
-                <button class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg text-lg font-semibold">
-                    <i class="fas fa-utensils mr-2"></i>Xem thực đơn
-                </button>
-                <button class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-800 text-white px-8 py-3 rounded-lg text-lg font-semibold">
-                    <i class="fas fa-calendar mr-2"></i>Đặt bàn ngay
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Dishes -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold text-center mb-12">Món ăn nổi bật</h3>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="food-card bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="h-48 bg-gradient-to-r from-red-400 to-red-600 flex items-center justify-center">
-                        <i class="fas fa-drumstick-bite text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2">Cơm tấm sườn nướng</h4>
-                        <p class="text-gray-600 mb-4">Món ăn truyền thống miền Nam với hương vị đặc trưng</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-red-600">85.000₫</span>
-                            <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-                                <i class="fas fa-plus mr-2"></i>Thêm
-                            </button>
+            <!-- Reviews -->
+            <div class="bg-white py-12">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Khách hàng nói gì?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-4"></div>
+                            <div class="star-rating mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-2">"Món ăn ngon, đúng vị miền Nam. Giao hàng nhanh, đóng gói cẩn thận."</p>
+                            <p class="font-semibold">Anh Minh - TP.HCM</p>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="food-card bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="h-48 bg-gradient-to-r from-yellow-400 to-orange-600 flex items-center justify-center">
-                        <i class="fas fa-fish text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2">Cà ri gà</h4>
-                        <p class="text-gray-600 mb-4">Cà ri gà thơm ngon, đậm đà hương vị Nam Bộ</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-red-600">75.000₫</span>
-                            <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-                                <i class="fas fa-plus mr-2"></i>Thêm
-                            </button>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-4"></div>
+                            <div class="star-rating mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-2">"Không gian nhà hàng đẹp, phục vụ nhiệt tình. Sẽ quay lại lần sau."</p>
+                            <p class="font-semibold">Chị Lan - Bình Dương</p>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="food-card bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="h-48 bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center">
-                        <i class="fas fa-leaf text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold mb-2">Gỏi cuốn tôm thịt</h4>
-                        <p class="text-gray-600 mb-4">Gỏi cuốn tươi ngon với tôm thịt và rau sống</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-red-600">45.000₫</span>
-                            <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-                                <i class="fas fa-plus mr-2"></i>Thêm
-                            </button>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-4"></div>
+                            <div class="star-rating mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-2">"Bánh xèo giòn tan, nước chấm đậm đà. Giá cả hợp lý."</p>
+                            <p class="font-semibold">Anh Tuan - Đồng Nai</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Services -->
-    <section class="py-16 gradient-bg text-white">
-        <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold text-center mb-12">Dịch vụ của chúng tôi</h3>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <i class="fas fa-motorcycle text-6xl mb-4"></i>
-                    <h4 class="text-xl font-bold mb-2">Giao hàng tận nơi</h4>
-                    <p>Giao hàng nhanh chóng trong bán kính 10km</p>
-                </div>
-                <div class="text-center">
-                    <i class="fas fa-calendar-check text-6xl mb-4"></i>
-                    <h4 class="text-xl font-bold mb-2">Đặt bàn online</h4>
-                    <p>Đặt bàn dễ dàng qua website hoặc điện thoại</p>
-                </div>
-                <div class="text-center">
-                    <i class="fas fa-users text-6xl mb-4"></i>
-                    <h4 class="text-xl font-bold mb-2">Tiệc tập thể</h4>
-                    <p>Phục vụ tiệc cưới, sinh nhật và các sự kiện</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<!-- About Page -->
-<div id="aboutPage" class="page-section hidden">
-    <div class="container mx-auto px-4 py-16">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12">Giới thiệu về Ẩm thực Phương Nam</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-                <div>
-                    <div class="h-64 bg-gradient-to-r from-red-400 to-red-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-store text-8xl text-white"></i>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">Câu chuyện của chúng tôi</h3>
-                    <p class="text-gray-600 mb-4">
-                        Được thành lập từ năm 2010, Ẩm thực Phương Nam đã trở thành địa chỉ quen thuộc của những người yêu thích hương vị đậm đà miền Nam Việt Nam.
-                    </p>
-                    <p class="text-gray-600 mb-4">
-                        Với hơn 13 năm kinh nghiệm, chúng tôi tự hào mang đến những món ăn truyền thống được chế biến từ nguyên liệu tươi ngon nhất.
-                    </p>
-                    <p class="text-gray-600">
-                        Đội ngũ đầu bếp giàu kinh nghiệm của chúng tôi luôn đảm bảo chất lượng và hương vị đặc trưng trong từng món ăn.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="text-center bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-medal text-4xl text-yellow-500 mb-4"></i>
-                    <h4 class="text-xl font-bold mb-2">13+ Năm kinh nghiệm</h4>
-                    <p class="text-gray-600">Phục vụ khách hàng với chất lượng tốt nhất</p>
-                </div>
-                <div class="text-center bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-heart text-4xl text-red-500 mb-4"></i>
-                    <h4 class="text-xl font-bold mb-2">1000+ Khách hàng hài lòng</h4>
-                    <p class="text-gray-600">Được tin tưởng và yêu thích</p>
-                </div>
-                <div class="text-center bg-white p-8 rounded-lg shadow-lg">
-                    <i class="fas fa-utensils text-4xl text-green-500 mb-4"></i>
-                    <h4 class="text-xl font-bold mb-2">50+ Món ăn đa dạng</h4>
-                    <p class="text-gray-600">Thực đơn phong phú, đa dạng</p>
-                </div>
-            </div>
-
-            <div class="bg-white p-8 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-bold mb-6 text-center">Tầm nhìn & Sứ mệnh</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="text-xl font-bold mb-3 text-blue-600">Tầm nhìn</h4>
-                        <p class="text-gray-600">
-                            Trở thành chuỗi nhà hàng ẩm thực miền Nam hàng đầu, mang hương vị truyền thống Việt Nam đến gần hơn với mọi người.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-bold mb-3 text-red-600">Sứ mệnh</h4>
-                        <p class="text-gray-600">
-                            Bảo tồn và phát triển văn hóa ẩm thực miền Nam, mang đến trải nghiệm ẩm thực tuyệt vời cho khách hàng.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Menu Page -->
-<div id="menuPage" class="page-section hidden">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center mb-8">Thực đơn</h2>
-        
-        <!-- Search and Filter -->
-        <div class="max-w-2xl mx-auto mb-12">
-            <div class="flex space-x-4">
-                <div class="flex-1 relative">
-                    <input type="text" id="searchInput" placeholder="Tìm kiếm món ăn..." 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-                    <i class="fas fa-search absolute right-4 top-4 text-gray-400"></i>
-                </div>
-                <select id="categoryFilter" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-                    <option value="">Tất cả danh mục</option>
-                    <option value="com">Cơm</option>
-                    <option value="pho">Phở & Bún</option>
-                    <option value="mon-chien">Món chiên</option>
-                    <option value="nuong">Món nướng</option>
-                    <option value="goi">Gỏi & Salad</option>
-                    <option value="do-uong">Đồ uống</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Menu Categories -->
-        <div class="mb-8">
-            <div class="flex flex-wrap justify-center gap-4">
-                <button class="category-btn bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700" data-category="">
-                    Tất cả
-                </button>
-                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-red-100" data-category="com">
-                    Cơm
-                </button>
-                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-red-100" data-category="pho">
-                    Phở & Bún
-                </button>
-                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-red-100" data-category="mon-chien">
-                    Món chiên
-                </button>
-                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-red-100" data-category="nuong">
-                    Món nướng
-                </button>
-                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-red-100" data-category="goi">
-                    Gỏi & Salad
-                </button>
-                <button class="category-btn bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-red-100" data-category="do-uong">
-                    Đồ uống
-                </button>
-            </div>
-        </div>
-
-        <!-- Menu Items Grid -->
-        <div id="menuGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Menu items will be populated by JavaScript -->
-        </div>
-    </div>
-</div>
-
-<!-- Gallery Page -->
-<div id="galleryPage" class="page-section hidden">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center mb-12">Album ảnh</h2>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-gradient-to-r from-red-400 to-red-600 h-64 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
-                <div class="text-center text-white">
-                    <i class="fas fa-utensils text-4xl mb-2"></i>
-                    <p class="font-semibold">Không gian nhà hàng</p>
-                </div>
-            </div>
-            <div class="bg-gradient-to-r from-yellow-400 to-orange-600 h-64 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
-                <div class="text-center text-white">
-                    <i class="fas fa-drumstick-bite text-4xl mb-2"></i>
-                    <p class="font-semibold">Món ăn đặc sắc</p>
-                </div>
-            </div>
-            <div class="bg-gradient-to-r from-green-400 to-green-600 h-64 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
-                <div class="text-center text-white">
-                    <i class="fas fa-users text-4xl mb-2"></i>
-                    <p class="font-semibold">Khách hàng hài lòng</p>
-                </div>
-            </div>
-            <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-64 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
-                <div class="text-center text-white">
-                    <i class="fas fa-birthday-cake text-4xl mb-2"></i>
-                    <p class="font-semibold">Tiệc sinh nhật</p>
-                </div>
-            </div>
-            <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-64 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
-                <div class="text-center text-white">
-                    <i class="fas fa-ring text-4xl mb-2"></i>
-                    <p class="font-semibold">Tiệc cưới</p>
-                </div>
-            </div>
-            <div class="bg-gradient-to-r from-pink-400 to-pink-600 h-64 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
-                <div class="text-center text-white">
-                    <i class="fas fa-gift text-4xl mb-2"></i>
-                    <p class="font-semibold">Sự kiện đặc biệt</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mt-16 text-center">
-            <h3 class="text-2xl font-bold mb-8">Video giới thiệu</h3>
-            <div class="max-w-2xl mx-auto bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-                <div class="text-center text-gray-600">
-                    <i class="fas fa-play-circle text-6xl mb-4"></i>
-                    <p class="text-lg">Video giới thiệu nhà hàng</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Booking Page -->
-<div id="bookingPage" class="page-section hidden">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center mb-12">Đặt bàn</h2>
-        
-        <div class="max-w-2xl mx-auto">
-            <div class="bg-white p-8 rounded-lg shadow-lg">
-                <form id="bookingForm">
-                    <div class="grid md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Họ và tên *</label>
-                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500" placeholder="Nhập họ và tên">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Số điện thoại *</label>
-                            <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500" placeholder="Nhập số điện thoại">
-                        </div>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Ngày đặt bàn *</label>
-                            <input type="date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Giờ đặt bàn *</label>
-                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-                                <option value="">Chọn giờ</option>
-                                <option value="11:00">11:00</option>
-                                <option value="11:30">11:30</option>
-                                <option value="12:00">12:00</option>
-                                <option value="12:30">12:30</option>
-                                <option value="18:00">18:00</option>
-                                <option value="18:30">18:30</option>
-                                <option value="19:00">19:00</option>
-                                <option value="19:30">19:30</option>
-                                <option value="20:00">20:00</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Số lượng khách *</label>
-                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-                                <option value="">Chọn số khách</option>
-                                <option value="1">1 người</option>
-                                <option value="2">2 người</option>
-                                <option value="3">3 người</option>
-                                <option value="4">4 người</option>
-                                <option value="5">5 người</option>
-                                <option value="6">6 người</option>
-                                <option value="7">7 người</option>
-                                <option value="8">8 người</option>
-                                <option value="10+">10+ người</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Loại bàn</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-                                <option value="">Bàn thường</option>
-                                <option value="vip">Bàn VIP</option>
-                                <option value="private">Phòng riêng</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-gray-700 font-semibold mb-2">Ghi chú</label>
-                        <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500" rows="3" placeholder="Yêu cầu đặc biệt (nếu có)"></textarea>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg text-lg font-semibold">
-                            <i class="fas fa-calendar-check mr-2"></i>Đặt bàn ngay
+            <!-- CTA Section -->
+            <div class="bg-brand-primary text-white py-12">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-4">Đặt hàng ngay hôm nay!</h2>
+                    <p class="text-xl mb-8">Giao hàng miễn phí cho đơn từ 200k trong bán kính 5km</p>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="showSection('menu')" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale">
+                            Đặt món ngay
+                        </button>
+                        <button onclick="showSection('booking')" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors">
+                            Đặt bàn trước
                         </button>
                     </div>
-                </form>
-            </div>
-            
-            <div class="mt-12 bg-blue-50 p-6 rounded-lg">
-                <h3 class="text-xl font-bold mb-4">Thông tin liên hệ</h3>
-                <div class="space-y-2">
-                    <p><i class="fas fa-phone text-blue-600 mr-2"></i><strong>Hotline:</strong> 1900 1234</p>
-                    <p><i class="fas fa-map-marker-alt text-blue-600 mr-2"></i><strong>Địa chỉ:</strong> 123 Đường ABC, Quận 1, TP.HCM</p>
-                    <p><i class="fas fa-clock text-blue-600 mr-2"></i><strong>Giờ mở cửa:</strong> 11:00 - 22:00 (Thứ 2 - Chủ nhật)</p>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+        </section>
 
-<!-- Contact Page -->
-<div id="contactPage" class="page-section hidden">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center mb-12">Liên hệ</h2>
-        
-        <div class="grid md:grid-cols-2 gap-12">
-            <div>
-                <h3 class="text-2xl font-bold mb-6">Thông tin liên hệ</h3>
-                <div class="space-y-6">
-                    <div class="flex items-start space-x-4">
-                        <i class="fas fa-map-marker-alt text-2xl text-red-600 mt-1"></i>
+        <!-- ABOUT SECTION -->
+        <section id="about-section" class="section-hidden">
+            <div class="container mx-auto px-4 py-12">
+                <!-- Hero About -->
+                <div class="relative h-64 rounded-lg overflow-hidden mb-12 gradient-overlay">
+                    <div class="absolute inset-0 flex items-center justify-center text-white text-center">
                         <div>
-                            <h4 class="font-semibold mb-1">Địa chỉ</h4>
-                            <p class="text-gray-600">123 Đường ABC, Phường XYZ, Quận 1, TP. Hồ Chí Minh</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start space-x-4">
-                        <i class="fas fa-phone text-2xl text-red-600 mt-1"></i>
-                        <div>
-                            <h4 class="font-semibold mb-1">Điện thoại</h4>
-                            <p class="text-gray-600">Hotline: 1900 1234</p>
-                            <p class="text-gray-600">Di động: 0909 123 456</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start space-x-4">
-                        <i class="fas fa-envelope text-2xl text-red-600 mt-1"></i>
-                        <div>
-                            <h4 class="font-semibold mb-1">Email</h4>
-                            <p class="text-gray-600">info@phuongnamrestaurant.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start space-x-4">
-                        <i class="fas fa-clock text-2xl text-red-600 mt-1"></i>
-                        <div>
-                            <h4 class="font-semibold mb-1">Giờ mở cửa</h4>
-                            <p class="text-gray-600">Thứ 2 - Chủ nhật: 11:00 - 22:00</p>
-                            <p class="text-gray-600">Nghỉ các ngày lễ tết</p>
+                            <h1 class="text-4xl font-bold mb-4">Câu chuyện của chúng tôi</h1>
+                            <p class="text-xl">Hơn 20 năm gìn giữ hương vị đặc sản miền Nam</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Story -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 brand-primary">Khởi nguồn từ tình yêu ẩm thực</h2>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Ẩm Thực Phương Nam được thành lập vào năm 2003 bởi bà Nguyễn Thị Hoa - một người phụ nữ miền Tây với niềm đam mê ẩm thực quê hương. Bắt đầu từ một quầy cơm nhỏ ở chợ Bến Thành, chúng tôi đã không ngừng phát triển và mở rộng.
+                        </p>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Với phương châm "Giữ trọn hương vị truyền thống", chúng tôi luôn chọn lựa nguyên liệu tươi ngon từ các vùng miền Nam, từ gạo tấm Cần Thơ, tôm càng xanh Cà Mau đến rau củ sạch từ Đà Lạt.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Ngày nay, Ẩm Thực Phương Nam đã có 5 chi nhánh trên toàn TP.HCM và phục vụ hơn 1000 khách hàng mỗi ngày với dịch vụ ăn tại chỗ và giao hàng tận nơi.
+                        </p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-xl font-semibold mb-3 brand-primary">Tầm nhìn</h3>
+                            <p class="text-gray-700">Trở thành thương hiệu ẩm thực miền Nam hàng đầu, mang đến trải nghiệm ẩm thực authentic và dịch vụ chất lượng cao.</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-xl font-semibold mb-3 brand-primary">Sứ mệnh</h3>
+                            <p class="text-gray-700">Gìn giữ và phát huy giá trị ẩm thực truyền thống miền Nam, mang lại những bữa ăn ngon và kỷ niệm đẹp cho mọi gia đình Việt.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values -->
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Giá trị cốt lõi</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-heart text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">Chất lượng</h3>
+                            <p class="text-gray-600 text-sm">Nguyên liệu tươi ngon, quy trình chế biến khép kín, đảm bảo vệ sinh an toàn thực phẩm.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-clock text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">Tận tâm</h3>
+                            <p class="text-gray-600 text-sm">Phục vụ chu đáo, nhiệt tình, luôn lắng nghe và cải thiện theo phản hồi khách hàng.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-leaf text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">Truyền thống</h3>
+                            <p class="text-gray-600 text-sm">Giữ gìn công thức nấu ăn truyền thống, không ngừng sáng tạo để phù hợp thời đại.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-users text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">Cộng đồng</h3>
+                            <p class="text-gray-600 text-sm">Đồng hành cùng cộng đồng, tạo không gian gặp gỡ ấm cúng cho mọi gia đình.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Chứng nhận & Giải thưởng</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                            <i class="fas fa-certificate text-4xl text-yellow-500 mb-4"></i>
+                            <h3 class="font-semibold mb-2">ATTP 5 sao</h3>
+                            <p class="text-gray-600 text-sm">Chứng nhận An toàn Thực phẩm 5 sao từ Sở Y tế TP.HCM năm 2023</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                            <i class="fas fa-award text-4xl text-gold-500 mb-4"></i>
+                            <h3 class="font-semibold mb-2">Top 10 Nhà hàng</h3>
+                            <p class="text-gray-600 text-sm">Top 10 Nhà hàng ẩm thực miền Nam được yêu thích nhất 2023</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                            <i class="fas fa-star text-4xl text-blue-500 mb-4"></i>
+                            <h3 class="font-semibold mb-2">ISO 22000</h3>
+                            <p class="text-gray-600 text-sm">Chứng nhận hệ thống quản lý an toàn thực phẩm quốc tế</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Câu hỏi thường gặp</h2>
+                    <div class="space-y-4">
+                        <div class="border-b pb-4">
+                            <button class="flex items-center justify-between w-full text-left font-semibold" onclick="toggleFAQ(1)">
+                                <span>Nhà hàng có phục vụ chay không?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="faq1" class="hidden mt-2 text-gray-600">
+                                Có, chúng tôi có thực đơn chay phong phú với các món như cơm tấm chay, bánh xèo chay, hủ tiếu chay... được chế biến hoàn toàn từ nguyên liệu thực vật.
+                            </div>
+                        </div>
+                        <div class="border-b pb-4">
+                            <button class="flex items-center justify-between w-full text-left font-semibold" onclick="toggleFAQ(2)">
+                                <span>Có giao hàng vào cuối tuần không?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="faq2" class="hidden mt-2 text-gray-600">
+                                Có, chúng tôi phục vụ giao hàng 7 ngày trong tuần từ 8:00 - 21:30. Cuối tuần có thể hơi chậm do lượng đơn đông.
+                            </div>
+                        </div>
+                        <div class="border-b pb-4">
+                            <button class="flex items-center justify-between w-full text-left font-semibold" onclick="toggleFAQ(3)">
+                                <span>Có thể đặt bàn cho nhóm lớn không?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="faq3" class="hidden mt-2 text-gray-600">
+                                Có, chúng tôi nhận đặt bàn cho nhóm từ 10-50 người. Vui lòng liên hệ trước ít nhất 1 ngày để được tư vấn menu và không gian phù hợp.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU SECTION -->
+        <section id="menu-section" class="section-hidden">
+            <div class="container mx-auto px-4 py-8">
+                <h1 class="text-3xl font-bold text-center mb-8 brand-primary">Thực đơn</h1>
                 
-                <div class="mt-8">
-                    <h4 class="font-semibold mb-4">Theo dõi chúng tôi</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700">
-                            <i class="fab fa-facebook-f"></i>
+                <!-- Filter & Search -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <!-- Category Filter -->
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="filterMenuCategory('all')" class="category-filter active bg-brand-primary text-white px-4 py-2 rounded-lg text-sm">
+                                Tất cả
+                            </button>
+                            <button onclick="filterMenuCategory('com-tam')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
+                                Cơm tấm
+                            </button>
+                            <button onclick="filterMenuCategory('banh-xeo')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
+                                Bánh xèo
+                            </button>
+                            <button onclick="filterMenuCategory('hu-tieu')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
+                                Hủ tiếu
+                            </button>
+                            <button onclick="filterMenuCategory('nuoc-uong')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
+                                Thức uống
+                            </button>
+                        </div>
+                        
+                        <!-- Sort & Price Filter -->
+                        <div class="flex items-center gap-4">
+                            <select id="sortMenu" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="sortMenu()">
+                                <option value="default">Sắp xếp theo</option>
+                                <option value="price-asc">Giá tăng dần</option>
+                                <option value="price-desc">Giá giảm dần</option>
+                                <option value="rating">Đánh giá cao</option>
+                                <option value="popular">Phổ biến</option>
+                            </select>
+                            
+                            <select id="priceFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="filterByPrice()">
+                                <option value="all">Mọi giá</option>
+                                <option value="0-50">Dưới 50k</option>
+                                <option value="50-100">50k - 100k</option>
+                                <option value="100-200">100k - 200k</option>
+                                <option value="200+">Trên 200k</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Grid -->
+                <div id="menuGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                    <!-- Cơm tấm -->
+                    <div class="menu-item com-tam bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="65000" data-rating="4.5">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
+                                <i class="fas fa-bowl-rice text-6xl text-gray-300"></i>
+                            </div>
+                            <div class="absolute top-2 left-2 badge-sale text-white px-2 py-1 rounded-lg text-xs font-bold">
+                                -20%
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Cơm tấm sườn nướng</h3>
+                            <p class="text-gray-600 text-sm mb-2">Cơm tấm thơm, sườn nướng mềm, chả trứng, bì</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.5) 127 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-red-500 font-bold">65.000đ</span>
+                                    <span class="text-gray-400 line-through ml-2">80.000đ</span>
+                                </div>
+                                <button onclick="openFoodModal('com-tam-suon')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                                    Chi tiết
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item com-tam bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="58000" data-rating="4.3">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-red-100 to-pink-100 flex items-center justify-center">
+                                <i class="fas fa-drumstick-bite text-6xl text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Cơm tấm gà nướng</h3>
+                            <p class="text-gray-600 text-sm mb-2">Cơm tấm, đùi gà nướng ngũ vị hương</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.3) 89 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-red-500 font-bold">58.000đ</span></div>
+                                <button onclick="openFoodModal('com-tam-ga')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bánh xèo -->
+                    <div class="menu-item banh-xeo bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="45000" data-rating="5.0">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-green-100 to-yellow-100 flex items-center justify-center">
+                                <i class="fas fa-cookie-bite text-6xl text-gray-300"></i>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-bold">HOT</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Bánh xèo miền Tây</h3>
+                            <p class="text-gray-600 text-sm mb-2">Bánh xèo giòn, tôm thịt, giá đỗ, rau sống</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(5.0) 89 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-red-500 font-bold">45.000đ</span></div>
+                                <button onclick="openFoodModal('banh-xeo')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item banh-xeo bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="35000" data-rating="4.2">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
+                                <i class="fas fa-seedling text-6xl text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Bánh xèo chay</h3>
+                            <p class="text-gray-600 text-sm mb-2">Bánh xèo chay với nấm, đậu hũ, giá đỗ</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.2) 45 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-red-500 font-bold">35.000đ</span></div>
+                                <button onclick="openFoodModal('banh-xeo-chay')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hủ tiếu -->
+                    <div class="menu-item hu-tieu bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="38000" data-rating="4.4">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                                <i class="fas fa-bowl-food text-6xl text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Hủ tiếu Nam Vang</h3>
+                            <p class="text-gray-600 text-sm mb-2">Hủ tiếu tôm thịt, gan, tim, nước dùng ngọt</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.4) 56 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-red-500 font-bold">38.000đ</span></div>
+                                <button onclick="openFoodModal('hu-tieu')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item hu-tieu bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="42000" data-rating="4.6">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
+                                <i class="fas fa-fire text-6xl text-gray-300"></i>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-lg text-xs font-bold">CAY</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Hủ tiếu Mỹ Tho</h3>
+                            <p class="text-gray-600 text-sm mb-2">Hủ tiếu đặc biệt Mỹ Tho, tôm cua thịt</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.6) 72 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-red-500 font-bold">42.000đ</span></div>
+                                <button onclick="openFoodModal('hu-tieu-mytho')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thức uống -->
+                    <div class="menu-item nuoc-uong bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="15000" data-rating="4.8">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-green-100 to-lime-100 flex items-center justify-center">
+                                <i class="fas fa-glass-water text-6xl text-gray-300"></i>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-lg text-xs font-bold">MỚI</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Nước mía tươi</h3>
+                            <p class="text-gray-600 text-sm mb-2">Nước mía tươi nguyên chất, không chất bảo quản</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.8) 23 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-red-500 font-bold">15.000đ</span></div>
+                                <button onclick="openFoodModal('nuoc-mia')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item nuoc-uong bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded" data-price="25000" data-rating="4.5">
+                        <div class="relative">
+                            <div class="w-full h-48 bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
+                                <i class="fas fa-lemon text-6xl text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">Nước chanh dây</h3>
+                            <p class="text-gray-600 text-sm mb-2">Nước chanh dây tươi mát, thêm soda</p>
+                            <div class="flex items-center mb-2">
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">(4.5) 67 đánh giá</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-red-500 font-bold">25.000đ</span></div>
+                                <button onclick="openFoodModal('chanh-day')" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center">
+                    <nav class="flex space-x-2">
+                        <button class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">‹</button>
+                        <button class="px-3 py-2 bg-brand-primary text-white rounded-lg">1</button>
+                        <button class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">2</button>
+                        <button class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">3</button>
+                        <button class="px-3 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">›</button>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALBUM SECTION -->
+        <section id="album-section" class="section-hidden">
+            <div class="container mx-auto px-4 py-8">
+                <h1 class="text-3xl font-bold text-center mb-8 brand-primary">Album ảnh</h1>
+                
+                <!-- Filter Tabs -->
+                <div class="flex justify-center mb-8">
+                    <div class="bg-white rounded-lg shadow-lg p-2">
+                        <button onclick="filterAlbum('all')" class="album-filter active px-4 py-2 rounded-lg mx-1 bg-brand-primary text-white">
+                            Tất cả
+                        </button>
+                        <button onclick="filterAlbum('food')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                            Món ăn
+                        </button>
+                        <button onclick="filterAlbum('restaurant')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                            Không gian
+                        </button>
+                        <button onclick="filterAlbum('events')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                            Sự kiện
+                        </button>
+                        <button onclick="filterAlbum('customers')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                            Khách hàng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Masonry Gallery -->
+                <div class="masonry" id="albumGallery">
+                    <!-- Food Images -->
+                    <div class="album-item food" onclick="openLightbox(0)">
+                        <div class="w-full h-64 bg-gradient-to-br from-yellow-100 to-orange-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-bowl-rice text-6xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Cơm tấm sườn nướng</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item food" onclick="openLightbox(1)">
+                        <div class="w-full h-48 bg-gradient-to-br from-green-100 to-yellow-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-cookie-bite text-5xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Bánh xèo miền Tây</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item food" onclick="openLightbox(2)">
+                        <div class="w-full h-72 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-bowl-food text-6xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Hủ tiếu Nam Vang</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Restaurant Images -->
+                    <div class="album-item restaurant" onclick="openLightbox(3)">
+                        <div class="w-full h-56 bg-gradient-to-br from-brown-100 to-orange-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-store text-5xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Mặt tiền nhà hàng</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item restaurant" onclick="openLightbox(4)">
+                        <div class="w-full h-64 bg-gradient-to-br from-red-100 to-pink-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-chair text-6xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Không gian bàn ăn</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item restaurant" onclick="openLightbox(5)">
+                        <div class="w-full h-40 bg-gradient-to-br from-gray-100 to-blue-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-utensils text-4xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Bếp chế biến</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Images -->
+                    <div class="album-item events" onclick="openLightbox(6)">
+                        <div class="w-full h-60 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-birthday-cake text-6xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Tiệc sinh nhật</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item events" onclick="openLightbox(7)">
+                        <div class="w-full h-52 bg-gradient-to-br from-gold-100 to-yellow-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-glass-cheers text-5xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Tiệc công ty</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Images -->
+                    <div class="album-item customers" onclick="openLightbox(8)">
+                        <div class="w-full h-44 bg-gradient-to-br from-teal-100 to-green-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-users text-5xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Gia đình khách hàng</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item customers" onclick="openLightbox(9)">
+                        <div class="w-full h-68 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-smile text-6xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Khách hàng vui vẻ</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item food" onclick="openLightbox(10)">
+                        <div class="w-full h-56 bg-gradient-to-br from-pink-100 to-red-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-glass-water text-5xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Thức uống tươi mát</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="album-item restaurant" onclick="openLightbox(11)">
+                        <div class="w-full h-48 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="text-center">
+                                <i class="fas fa-couch text-4xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600 font-semibold">Khu vực chờ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING SECTION -->
+        <section id="booking-section" class="section-hidden">
+            <div class="bg-brand-warm text-white py-12">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl font-bold mb-4">Đặt bàn trực tuyến</h1>
+                        <p class="text-xl">Đặt bàn dễ dàng, trải nghiệm tuyệt vời</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <!-- Booking Form -->
+                        <div class="bg-white rounded-lg shadow-lg p-8 text-gray-800">
+                            <h2 class="text-2xl font-bold mb-6 brand-warm">Thông tin đặt bàn</h2>
+                            <form id="bookingForm" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Họ và tên *</label>
+                                        <input type="text" id="bookingName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-warm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Số điện thoại *</label>
+                                        <input type="tel" id="bookingPhone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-warm">
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Ngày đặt *</label>
+                                        <input type="date" id="bookingDate" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-warm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Giờ đặt *</label>
+                                        <select id="bookingTime" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-warm">
+                                            <option value="">Chọn giờ</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="11:30">11:30</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="12:30">12:30</option>
+                                            <option value="13:00">13:00</option>
+                                            <option value="17:00">17:00</option>
+                                            <option value="17:30">17:30</option>
+                                            <option value="18:00">18:00</option>
+                                            <option value="18:30">18:30</option>
+                                            <option value="19:00">19:00</option>
+                                            <option value="19:30">19:30</option>
+                                            <option value="20:00">20:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Số khách *</label>
+                                        <select id="bookingGuests" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-warm">
+                                            <option value="">Chọn số khách</option>
+                                            <option value="1">1 người</option>
+                                            <option value="2">2 người</option>
+                                            <option value="3">3 người</option>
+                                            <option value="4">4 người</option>
+                                            <option value="5">5 người</option>
+                                            <option value="6">6 người</option>
+                                            <option value="7">7 người</option>
+                                            <option value="8">8 người</option>
+                                            <option value="10+">Trên 10 người</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Chi nhánh</label>
+                                        <select id="bookingBranch" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-warm">
+                                            <option value="district1">Quận 1 - Nguyễn Huệ</option>
+                                            <option value="district3">Quận 3 - Nam Kỳ Khởi Nghĩa</option>
+                                            <option value="district7">Quận 7 - Phú Mỹ Hưng</option>
+                                            <option value="binh-duong">Bình Dương - Thủ Dầu Một</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">Yêu cầu đặc biệt</label>
+                                    <textarea id="bookingNote" rows="3" placeholder="VD: Gần cửa sổ, có ghế trẻ em, không gian yên tĩnh..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-warm"></textarea>
+                                </div>
+                                
+                                <div class="flex items-start space-x-2">
+                                    <input type="checkbox" id="bookingPolicy" required class="mt-1">
+                                    <label for="bookingPolicy" class="text-sm">
+                                        Tôi đã đọc và đồng ý với <a href="#" class="text-brand-warm underline">chính sách đặt bàn</a> của nhà hàng
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-brand-warm text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">
+                                    <i class="fas fa-calendar-check mr-2"></i>Đặt bàn ngay
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Info & Policies -->
+                        <div class="space-y-6">
+                            <!-- Available Tables -->
+                            <div class="bg-white rounded-lg shadow-lg p-6 text-gray-800">
+                                <h3 class="text-xl font-bold mb-4 brand-warm">Thông tin bàn trống hôm nay</h3>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                                        <span>11:00 - 13:00</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-sm">8 bàn trống</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                                        <span>17:30 - 19:00</span>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded text-sm">3 bàn trống</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                                        <span>19:30 - 21:00</span>
+                                        <span class="px-2 py-1 bg-red-100 text-red-600 rounded text-sm">Hết bàn</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Policies -->
+                            <div class="bg-white rounded-lg shadow-lg p-6 text-gray-800">
+                                <h3 class="text-xl font-bold mb-4 brand-warm">Chính sách đặt bàn</h3>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                        <span>Miễn phí đặt bàn trước 24h</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-clock text-blue-500 mt-1 mr-2"></i>
+                                        <span>Giữ bàn trong 15 phút kể từ giờ đặt</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-phone text-orange-500 mt-1 mr-2"></i>
+                                        <span>Xác nhận qua SMS/Zalo sau khi đặt</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-edit text-purple-500 mt-1 mr-2"></i>
+                                        <span>Có thể thay đổi/hủy trước 2h</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-users text-red-500 mt-1 mr-2"></i>
+                                        <span>Nhóm >10 người vui lòng gọi điện</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Contact -->
+                            <div class="bg-white rounded-lg shadow-lg p-6 text-gray-800">
+                                <h3 class="text-xl font-bold mb-4 brand-warm">Liên hệ trực tiếp</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-phone text-brand-warm mr-3"></i>
+                                        <div>
+                                            <div class="font-semibold">Hotline đặt bàn</div>
+                                            <div class="text-sm text-gray-600">0123-456-789</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fab fa-facebook-messenger text-blue-500 mr-3"></i>
+                                        <div>
+                                            <div class="font-semibold">Facebook Messenger</div>
+                                            <div class="text-sm text-gray-600">m.me/amthucphuongnam</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-comment text-green-500 mr-3"></i>
+                                        <div>
+                                            <div class="font-semibold">Zalo OA</div>
+                                            <div class="text-sm text-gray-600">Ẩm Thực Phương Nam</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact-section" class="section-hidden">
+            <div class="container mx-auto px-4 py-8">
+                <h1 class="text-3xl font-bold text-center mb-8 brand-primary">Liên hệ</h1>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div>
+                        <h2 class="text-2xl font-bold mb-6 brand-primary">Thông tin liên hệ</h2>
+                        
+                        <!-- Branch 1 -->
+                        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold mb-4 brand-warm">Chi nhánh Quận 1 (Trụ sở chính)</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-map-marker-alt text-red-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <div class="font-semibold">Địa chỉ:</div>
+                                        <div class="text-gray-600">123 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone text-green-500 mr-3"></i>
+                                    <div>
+                                        <span class="font-semibold">Điện thoại:</span>
+                                        <span class="text-gray-600 ml-2">028-3823-4567</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-blue-500 mr-3"></i>
+                                    <div>
+                                        <span class="font-semibold">Giờ mở cửa:</span>
+                                        <span class="text-gray-600 ml-2">8:00 - 22:00 (Hàng ngày)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Branch 2 -->
+                        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                            <h3 class="text-xl font-semibold mb-4 brand-warm">Chi nhánh Quận 7</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-map-marker-alt text-red-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <div class="font-semibold">Địa chỉ:</div>
+                                        <div class="text-gray-600">456 Nguyễn Thị Thập, Phường Tân Phú, Quận 7, TP.HCM</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone text-green-500 mr-3"></i>
+                                    <div>
+                                        <span class="font-semibold">Điện thoại:</span>
+                                        <span class="text-gray-600 ml-2">028-5413-9876</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-blue-500 mr-3"></i>
+                                    <div>
+                                        <span class="font-semibold">Giờ mở cửa:</span>
+                                        <span class="text-gray-600 ml-2">10:00 - 21:30 (Hàng ngày)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social & Others -->
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-xl font-semibold mb-4 brand-primary">Mạng xã hội</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fab fa-facebook text-blue-600 text-2xl mr-3"></i>
+                                    <div>
+                                        <div class="font-semibold">Facebook</div>
+                                        <div class="text-gray-600">facebook.com/amthucphuongnam</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fab fa-instagram text-pink-500 text-2xl mr-3"></i>
+                                    <div>
+                                        <div class="font-semibold">Instagram</div>
+                                        <div class="text-gray-600">@amthucphuongnam</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fab fa-youtube text-red-500 text-2xl mr-3"></i>
+                                    <div>
+                                        <div class="font-semibold">YouTube</div>
+                                        <div class="text-gray-600">Ẩm Thực Phương Nam Official</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope text-gray-600 text-2xl mr-3"></i>
+                                    <div>
+                                        <div class="font-semibold">Email</div>
+                                        <div class="text-gray-600"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7910171f163918140d110c1a09110c16171e171814570f17">[email&#160;protected]</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form & Map -->
+                    <div>
+                        <!-- Contact Form -->
+                        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                            <h2 class="text-2xl font-bold mb-6 brand-primary">Gửi tin nhắn</h2>
+                            <form id="contactForm" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Họ và tên *</label>
+                                        <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold mb-2">Email *</label>
+                                        <input type="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">Số điện thoại</label>
+                                    <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">Chủ đề</label>
+                                    <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary">
+                                        <option>Góp ý dịch vụ</option>
+                                        <option>Khiếu nại</option>
+                                        <option>Đặt bàn nhóm lớn</option>
+                                        <option>Hợp tác kinh doanh</option>
+                                        <option>Khác</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">Nội dung *</label>
+                                    <textarea rows="4" required placeholder="Nhập nội dung tin nhắn..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-brand-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-paper-plane mr-2"></i>Gửi tin nhắn
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Map -->
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-xl font-semibold mb-4 brand-primary">Bản đồ chi nhánh chính</h3>
+                            <div class="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                                <div class="text-center text-gray-500">
+                                    <i class="fas fa-map-marked-alt text-4xl mb-2"></i>
+                                    <p>Bản đồ nhúng Google Maps</p>
+                                    <p class="text-sm">123 Nguyễn Huệ, Quận 1, TP.HCM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN SECTION -->
+        <section id="admin-section" class="section-hidden">
+            <div class="flex">
+                <!-- Sidebar -->
+                <div class="w-64 admin-sidebar bg-gray-800 text-white p-4">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-utensils text-2xl mr-3"></i>
+                        <h2 class="text-xl font-bold">Admin Panel</h2>
+                    </div>
+                    <nav class="space-y-2">
+                        <button onclick="showAdminTab('dashboard')" class="admin-nav-item active w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-chart-line mr-2"></i>Dashboard
+                        </button>
+                        <button onclick="showAdminTab('foods')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-utensils mr-2"></i>Quản lý món ăn
+                        </button>
+                        <button onclick="showAdminTab('categories')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-list mr-2"></i>Danh mục
+                        </button>
+                        <button onclick="showAdminTab('bookings')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
+                        </button>
+                        <button onclick="showAdminTab('orders')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-shopping-cart mr-2"></i>Đơn hàng
+                        </button>
+                        <button onclick="showAdminTab('gallery')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-images mr-2"></i>Thư viện ảnh
+                        </button>
+                        <button onclick="showAdminTab('users')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-users mr-2"></i>Người dùng
+                        </button>
+                        <button onclick="showAdminTab('settings')" class="admin-nav-item w-full text-left px-3 py-2 rounded hover:bg-gray-700">
+                            <i class="fas fa-cog mr-2"></i>Cấu hình
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Main Content -->
+                <div class="flex-1 bg-gray-100">
+                    <!-- Dashboard -->
+                    <div id="admin-dashboard" class="admin-tab-content p-6">
+                        <h1 class="text-3xl font-bold mb-6 brand-primary">Dashboard</h1>
+                        
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-white rounded-lg shadow p-6">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-blue-100 rounded-full">
+                                        <i class="fas fa-shopping-cart text-blue-600 text-xl"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-2xl font-bold">247</h3>
+                                        <p class="text-gray-600">Đơn hàng hôm nay</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg shadow p-6">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-green-100 rounded-full">
+                                        <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-2xl font-bold">12.5M</h3>
+                                        <p class="text-gray-600">Doanh thu hôm nay</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg shadow p-6">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-yellow-100 rounded-full">
+                                        <i class="fas fa-calendar-alt text-yellow-600 text-xl"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-2xl font-bold">58</h3>
+                                        <p class="text-gray-600">Đặt bàn hôm nay</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg shadow p-6">
+                                <div class="flex items-center">
+                                    <div class="p-3 bg-purple-100 rounded-full">
+                                        <i class="fas fa-users text-purple-600 text-xl"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-2xl font-bold">1,234</h3>
+                                        <p class="text-gray-600">Khách hàng</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg shadow p-6">
+                                <h3 class="text-lg font-semibold mb-4">Doanh thu 7 ngày qua</h3>
+                                <div class="h-64 bg-gray-50 rounded flex items-center justify-center">
+                                    <p class="text-gray-500">Biểu đồ doanh thu (Chart.js)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg shadow p-6">
+                                <h3 class="text-lg font-semibold mb-4">Món ăn bán chạy</h3>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span>Cơm tấm sườn nướng</span>
+                                        <span class="font-bold">89 phần</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Bánh xèo miền Tây</span>
+                                        <span class="font-bold">67 phần</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Hủ tiếu Nam Vang</span>
+                                        <span class="font-bold">45 phần</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Foods Management -->
+                    <div id="admin-foods" class="admin-tab-content hidden p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h1 class="text-3xl font-bold brand-primary">Quản lý món ăn</h1>
+                            <button onclick="openFoodForm()" class="bg-brand-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                                <i class="fas fa-plus mr-2"></i>Thêm món mới
+                            </button>
+                        </div>
+
+                        <!-- Filter -->
+                        <div class="bg-white rounded-lg shadow p-4 mb-6">
+                            <div class="flex flex-wrap gap-4">
+                                <select class="border border-gray-300 rounded px-3 py-2">
+                                    <option>Tất cả danh mục</option>
+                                    <option>Cơm tấm</option>
+                                    <option>Bánh xèo</option>
+                                    <option>Hủ tiếu</option>
+                                    <option>Thức uống</option>
+                                </select>
+                                <input type="text" placeholder="Tìm kiếm món ăn..." class="border border-gray-300 rounded px-3 py-2 flex-1">
+                                <button class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Food List -->
+                        <div class="bg-white rounded-lg shadow">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left">Ảnh</th>
+                                        <th class="px-6 py-3 text-left">Tên món</th>
+                                        <th class="px-6 py-3 text-left">Danh mục</th>
+                                        <th class="px-6 py-3 text-left">Giá</th>
+                                        <th class="px-6 py-3 text-left">Trạng thái</th>
+                                        <th class="px-6 py-3 text-left">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4">
+                                            <div class="w-16 h-16 bg-gray-200 rounded"></div>
+                                        </td>
+                                        <td class="px-6 py-4">Cơm tấm sườn nướng</td>
+                                        <td class="px-6 py-4">Cơm tấm</td>
+                                        <td class="px-6 py-4">65,000đ</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-sm">Hoạt động</span>
+                                        </td>
+                                        <td class="px-6 py-4 space-x-2">
+                                            <button class="text-blue-500 hover:text-blue-700">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4">
+                                            <div class="w-16 h-16 bg-gray-200 rounded"></div>
+                                        </td>
+                                        <td class="px-6 py-4">Bánh xèo miền Tây</td>
+                                        <td class="px-6 py-4">Bánh xèo</td>
+                                        <td class="px-6 py-4">45,000đ</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-sm">Hoạt động</span>
+                                        </td>
+                                        <td class="px-6 py-4 space-x-2">
+                                            <button class="text-blue-500 hover:text-blue-700">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Bookings Management -->
+                    <div id="admin-bookings" class="admin-tab-content hidden p-6">
+                        <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý đặt bàn</h1>
+                        
+                        <!-- Filter -->
+                        <div class="bg-white rounded-lg shadow p-4 mb-6">
+                            <div class="flex flex-wrap gap-4">
+                                <input type="date" class="border border-gray-300 rounded px-3 py-2">
+                                <select class="border border-gray-300 rounded px-3 py-2">
+                                    <option>Tất cả trạng thái</option>
+                                    <option>Chờ xác nhận</option>
+                                    <option>Đã xác nhận</option>
+                                    <option>Hoàn thành</option>
+                                    <option>Hủy</option>
+                                </select>
+                                <input type="text" placeholder="Tìm theo SĐT, tên..." class="border border-gray-300 rounded px-3 py-2 flex-1">
+                            </div>
+                        </div>
+
+                        <!-- Booking List -->
+                        <div class="bg-white rounded-lg shadow">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left">ID</th>
+                                        <th class="px-6 py-3 text-left">Khách hàng</th>
+                                        <th class="px-6 py-3 text-left">SĐT</th>
+                                        <th class="px-6 py-3 text-left">Ngày/Giờ</th>
+                                        <th class="px-6 py-3 text-left">Số khách</th>
+                                        <th class="px-6 py-3 text-left">Trạng thái</th>
+                                        <th class="px-6 py-3 text-left">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4">#001</td>
+                                        <td class="px-6 py-4">Nguyễn Văn A</td>
+                                        <td class="px-6 py-4">0123-456-789</td>
+                                        <td class="px-6 py-4">15/12/2023 19:00</td>
+                                        <td class="px-6 py-4">4 người</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded text-sm">Chờ xác nhận</span>
+                                        </td>
+                                        <td class="px-6 py-4 space-x-2">
+                                            <button class="bg-green-500 text-white px-2 py-1 rounded text-sm">Xác nhận</button>
+                                            <button class="bg-red-500 text-white px-2 py-1 rounded text-sm">Từ chối</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Other admin tabs would be similar structures -->
+                    <div id="admin-categories" class="admin-tab-content hidden p-6">
+                        <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý danh mục</h1>
+                        <p class="text-gray-600">Tính năng quản lý danh mục...</p>
+                    </div>
+
+                    <div id="admin-orders" class="admin-tab-content hidden p-6">
+                        <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý đơn hàng</h1>
+                        <p class="text-gray-600">Tính năng quản lý đơn hàng...</p>
+                    </div>
+
+                    <div id="admin-gallery" class="admin-tab-content hidden p-6">
+                        <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý thư viện ảnh</h1>
+                        <p class="text-gray-600">Tính năng quản lý ảnh...</p>
+                    </div>
+
+                    <div id="admin-users" class="admin-tab-content hidden p-6">
+                        <h1 class="text-3xl font-bold mb-6 brand-primary">Quản lý người dùng</h1>
+                        <p class="text-gray-600">Tính năng quản lý người dùng...</p>
+                    </div>
+
+                    <div id="admin-settings" class="admin-tab-content hidden p-6">
+                        <h1 class="text-3xl font-bold mb-6 brand-primary">Cấu hình hệ thống</h1>
+                        <p class="text-gray-600">Tính năng cấu hình hệ thống...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-utensils text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Ẩm Thực Phương Nam</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Hương vị đặc sản miền Nam - Giao hàng tận nơi</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="text-sm text-gray-400">123 Nguyễn Huệ, Q.1, TP.HCM</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span class="text-sm text-gray-400">0123-456-789</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span class="text-sm text-gray-400"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e373038311e3f332a362b3d2e362b313039303f33702830">[email&#160;protected]</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Liên kết nhanh</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" onclick="showSection('about')" class="text-gray-400 hover:text-white">Giới thiệu</a></li>
+                        <li><a href="#" onclick="showSection('menu')" class="text-gray-400 hover:text-white">Thực đơn</a></li>
+                        <li><a href="#" onclick="showSection('booking')" class="text-gray-400 hover:text-white">Đặt bàn</a></li>
+                        <li><a href="#" onclick="showSection('contact')" class="text-gray-400 hover:text-white">Liên hệ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Dịch vụ</h4>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400">Ăn tại chỗ</span></li>
+                        <li><span class="text-gray-400">Giao hàng tận nơi</span></li>
+                        <li><span class="text-gray-400">Đặt tiệc</span></li>
+                        <li><span class="text-gray-400">Catering</span></li>
+                        <li><span class="text-gray-400">Đặt bàn online</span></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Mạng xã hội</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700">
+                            <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="bg-pink-600 text-white p-3 rounded-full hover:bg-pink-700">
+                        <a href="#" class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center hover:bg-pink-600">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="bg-red-600 text-white p-3 rounded-full hover:bg-red-700">
+                        <a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="#" class="bg-green-600 text-white p-3 rounded-full hover:bg-green-700">
-                            <i class="fab fa-zalo"></i>
+                        <a href="#" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600">
+                            <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
+                    <p class="text-gray-400 text-sm">Theo dõi để cập nhật khuyến mãi mới nhất!</p>
                 </div>
             </div>
-            
-            <div>
-                <h3 class="text-2xl font-bold mb-6">Gửi tin nhắn cho chúng tôi</h3>
-                <form id="contactForm" class="space-y-6">
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Họ và tên *</label>
-                        <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500" placeholder="Nhập họ và tên">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Email *</label>
-                        <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500" placeholder="Nhập email">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Số điện thoại</label>
-                        <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500" placeholder="Nhập số điện thoại">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Chủ đề</label>
-                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-                            <option value="">Chọn chủ đề</option>
-                            <option value="booking">Đặt bàn</option>
-                            <option value="menu">Thắc mắc về thực đơn</option>
-                            <option value="service">Dịch vụ</option>
-                            <option value="complain">Khiếu nại</option>
-                            <option value="other">Khác</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Nội dung *</label>
-                        <textarea required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500" rows="5" placeholder="Nhập nội dung tin nhắn"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg text-lg font-semibold">
-                        <i class="fas fa-paper-plane mr-2"></i>Gửi tin nhắn
-                    </button>
-                </form>
-            </div>
-        </div>
-        
-        <!-- Map -->
-        <div class="mt-16">
-            <h3 class="text-2xl font-bold text-center mb-6">Bản đồ</h3>
-            <div class="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                <div class="text-center text-gray-600">
-                    <i class="fas fa-map-marked-alt text-4xl mb-2"></i>
-                    <p class="text-lg">Bản đồ vị trí nhà hàng</p>
-                    <p class="text-sm">123 Đường ABC, Quận 1, TP.HCM</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Admin Page -->
-<div id="adminPage" class="page-section hidden">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center mb-12">Quản trị hệ thống</h2>
-        
-        <div class="grid md:grid-cols-3 gap-8 mb-12">
-            <button class="admin-tab bg-blue-600 text-white p-6 rounded-lg hover:bg-blue-700" data-tab="dishes">
-                <i class="fas fa-utensils text-3xl mb-4"></i>
-                <h3 class="text-xl font-bold">Quản lý món ăn</h3>
-                <p class="mt-2">Thêm, sửa, xóa món ăn</p>
-            </button>
-            
-            <button class="admin-tab bg-green-600 text-white p-6 rounded-lg hover:bg-green-700" data-tab="bookings">
-                <i class="fas fa-calendar text-3xl mb-4"></i>
-                <h3 class="text-xl font-bold">Quản lý đặt bàn</h3>
-                <p class="mt-2">Xem và quản lý đặt bàn</p>
-            </button>
-            
-            <button class="admin-tab bg-purple-600 text-white p-6 rounded-lg hover:bg-purple-700" data-tab="gallery">
-                <i class="fas fa-images text-3xl mb-4"></i>
-                <h3 class="text-xl font-bold">Quản lý ảnh</h3>
-                <p class="mt-2">Upload và quản lý hình ảnh</p>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2023 Ẩm Thực Phương Nam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Slide-over -->
+    <div id="cartOverlay" class="overlay fixed inset-0 z-40"></div>
+    <div id="cartSlide" class="cart-slide fixed right-0 top-0 h-full w-96 bg-white shadow-xl z-50 p-6">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold">Giỏ hàng</h2>
+            <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
             </button>
         </div>
 
-        <!-- Dishes Management -->
-        <div id="adminDishes" class="admin-content">
-            <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-                <h3 class="text-2xl font-bold mb-6">Thêm món ăn mới</h3>
-                <form id="addDishForm" class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Tên món ăn</label>
-                        <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Giá</label>
-                        <input type="number" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Danh mục</label>
-                        <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-                            <option value="com">Cơm</option>
-                            <option value="pho">Phở & Bún</option>
-                            <option value="mon-chien">Món chiên</option>
-                            <option value="nuong">Món nướng</option>
-                            <option value="goi">Gỏi & Salad</option>
-                            <option value="do-uong">Đồ uống</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Trạng thái</label>
-                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg">
-                            <option value="available">Có sẵn</option>
-                            <option value="unavailable">Hết món</option>
-                        </select>
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-gray-700 font-semibold mb-2">Mô tả</label>
-                        <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg" rows="3"></textarea>
-                    </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-                            <i class="fas fa-plus mr-2"></i>Thêm món ăn
-                        </button>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-bold mb-6">Danh sách món ăn</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full table-auto">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-left">Tên món</th>
-                                <th class="px-4 py-2 text-left">Giá</th>
-                                <th class="px-4 py-2 text-left">Danh mục</th>
-                                <th class="px-4 py-2 text-left">Trạng thái</th>
-                                <th class="px-4 py-2 text-left">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dishesTable">
-                            <!-- Dishes will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bookings Management -->
-        <div id="adminBookings" class="admin-content hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-bold mb-6">Danh sách đặt bàn</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full table-auto">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-left">Khách hàng</th>
-                                <th class="px-4 py-2 text-left">Số điện thoại</th>
-                                <th class="px-4 py-2 text-left">Ngày giờ</th>
-                                <th class="px-4 py-2 text-left">Số khách</th>
-                                <th class="px-4 py-2 text-left">Trạng thái</th>
-                                <th class="px-4 py-2 text-left">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bookingsTable">
-                            <tr>
-                                <td class="px-4 py-2">Nguyễn Văn A</td>
-                                <td class="px-4 py-2">0909123456</td>
-                                <td class="px-4 py-2">25/12/2023 19:00</td>
-                                <td class="px-4 py-2">4 người</td>
-                                <td class="px-4 py-2">
-                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">Đã xác nhận</span>
-                                </td>
-                                <td class="px-4 py-2">
-                                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mr-2">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gallery Management -->
-        <div id="adminGallery" class="admin-content hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-                <h3 class="text-2xl font-bold mb-6">Upload ảnh mới</h3>
-                <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
-                    <p class="text-gray-600 mb-4">Kéo thả ảnh vào đây hoặc click để chọn</p>
-                    <input type="file" multiple accept="image/*" class="hidden" id="imageUpload">
-                    <button onclick="document.getElementById('imageUpload').click()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-                        Chọn ảnh
-                    </button>
-                </div>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-bold mb-6">Thư viện ảnh</h3>
-                <div class="grid md:grid-cols-4 gap-4">
-                    <div class="relative group">
-                        <div class="bg-gray-200 h-32 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-image text-gray-400 text-2xl"></i>
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 rounded-lg flex items-center justify-center transition-opacity">
-                            <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-</main>
-
-<!-- Cart Modal -->
-<div id="cartModal" class="modal">
-    <div class="bg-white rounded-lg p-6 max-w-2xl mx-4 max-h-96 overflow-y-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-bold">Giỏ hàng</h3>
-            <button id="closeCart" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
-        </div>
-        
-        <div id="cartItems" class="space-y-4 mb-6">
+        <div id="cartItems" class="space-y-4 mb-6 max-h-96 overflow-y-auto">
             <!-- Cart items will be populated by JavaScript -->
         </div>
-        
+
         <div class="border-t pt-4">
-            <div class="flex justify-between items-center text-xl font-bold mb-4">
-                <span>Tổng cộng:</span>
-                <span id="cartTotal" class="text-red-600">0₫</span>
+            <div class="flex justify-between items-center mb-4">
+                <span class="font-semibold">Tổng cộng:</span>
+                <span id="cartTotal" class="text-xl font-bold text-red-500">0đ</span>
             </div>
-            <div class="flex space-x-4">
-                <button id="checkoutBtn" class="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700">
-                    <i class="fas fa-credit-card mr-2"></i>Thanh toán VNPay
+            
+            <div class="space-y-2">
+                <input type="text" placeholder="Mã giảm giá" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                <button class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300">
+                    Áp dụng mã
                 </button>
-                <button id="clearCart" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
-                    <i class="fas fa-trash mr-2"></i>Xóa tất cả
-                </button>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Login Modal -->
-<div id="loginModal" class="modal">
-    <div class="bg-white rounded-lg p-6 max-w-md mx-4">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-bold">Đăng nhập</h3>
-            <button id="closeLogin" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
-        </div>
-        
-        <form id="loginForm" class="space-y-4">
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Email/Số điện thoại</label>
-                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Mật khẩu</label>
-                <input type="password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-            </div>
-            <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700">
-                Đăng nhập
+            
+            <button onclick="checkout()" class="w-full bg-brand-primary text-white py-3 rounded-lg font-semibold mt-4 hover:bg-blue-600">
+                <i class="fas fa-credit-card mr-2"></i>Thanh toán VNPAY
             </button>
-        </form>
-        
-        <div class="mt-4 text-center">
-            <a href="#" class="text-blue-600 hover:underline">Quên mật khẩu?</a>
-            <span class="mx-2">|</span>
-            <a href="#" id="showRegister" class="text-blue-600 hover:underline">Đăng ký</a>
         </div>
     </div>
-</div>
 
-<!-- Register Modal -->
-<div id="registerModal" class="modal">
-    <div class="bg-white rounded-lg p-6 max-w-md mx-4">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-bold">Đăng ký</h3>
-            <button id="closeRegister" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
-        </div>
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold">Đăng nhập / Đăng ký</h2>
+                        <button onclick="toggleAuth()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <button id="loginTab
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDtI05IPPjTkk2mdjh24ncbmpfgvk838sDiKa34VgzdbHvxGhy8mTFaTTeGAth7%2F16O3LEdQj1oEUO%2BDI6KoGMReKU6P8%2F7PFXpyrAMpINEUqDYPjPQcBXgqZxofMrpTrw%2BN69bmwcXOy%2Bb9CcN0VZOie0Ml9TY4Hb%2BEIasG%2FIvho5h5RV6PTbLSp84ybTETWY2vzLv2IeUD9%2BZUNzKaem3gWK1kQJXMmixRLzHIHszCA7xtePTBad2JRpD4uQGwSYhoqlFbzXBcATBgRgnRVzpRGV3Gn0tYoKnK%2BoW69gUn%2BDib%2BSyEJq1VHSp%2BXjqqbQgC6UPCSN9%2F0XUp4bJE1A5GtRpXUQU0E%2Bd69wG%2FqP7HvDR8Ksjpyjr5%2BWYV%2FTHRA26BC3ZyhO%2BerNWrWFKOpM8YR7j3fipPldk6Otf7ZBRBTOkx%2Br8pRClN3%2Fh6FOAljOUlO8r%2Fs1LzcsfZK5gT1VFPjPz4FusxE1ypN4qZKZwfEN%2FhZCkBZz2tmzQA0VXbTawRcyGNkTB6qDP9yRx%2Fr%2F6c%3D";
+        window.__genspark_locale = "fr-FR";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDtI05IPPjTkk2mdjh24ncbmpfgvk838sDiKa34VgzdbHvxGhy8mTFaTTeGAth7/16O3LEdQj1oEUO+DI6KoGMReKU6P8/7PFXpyrAMpINEUqDYPjPQcBXgqZxofMrpTrw+N69bmwcXOy+b9CcN0VZOie0Ml9TY4Hb+EIasG/Ivho5h5RV6PTbLSp84ybTETWY2vzLv2IeUD9+ZUNzKaem3gWK1kQJXMmixRLzHIHszCA7xtePTBad2JRpD4uQGwSYhoqlFbzXBcATBgRgnRVzpRGV3Gn0tYoKnK+oW69gUn+Dib+SyEJq1VHSp+XjqqbQgC6UPCSN9/0XUp4bJE1A5GtRpXUQU0E+d69wG/qP7HvDR8Ksjpyjr5+WYV/THRA26BC3ZyhO+erNWrWFKOpM8YR7j3fipPldk6Otf7ZBRBTOkx+r8pRClN3/h6FOAljOUlO8r/s1LzcsfZK5gT1VFPjPz4FusxE1ypN4qZKZwfEN/hZCkBZz2tmzQA0VXbTawRcyGNkTB6qDP9yRx/r/6c=";
+    </script>
+    
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="html_badge_script2" src="https://www.genspark.ai/html_badge.js"></script>
         
-        <form id="registerForm" class="space-y-4">
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Họ và tên</label>
-                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Email</label>
-                <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Số điện thoại</label>
-                <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Mật khẩu</label>
-                <input type="password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Xác nhận mật khẩu</label>
-                <input type="password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
-            </div>
-            <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700">
-                Đăng ký
-            </button>
-        </form>
-        
-        <div class="mt-4 text-center">
-            <span>Đã có tài khoản? </span>
-            <a href="#" id="showLogin" class="text-blue-600 hover:underline">Đăng nhập</a>
-        </div>
-    </div>
-</div>
-
-<!-- Chatbot Widget -->
-<div class="chatbot-widget">
-    <button id="chatbotToggle" class="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700">
-        <i class="fas fa-comments text-xl"></i>
-    </button>
-    
-    <div id="chatbotWindow" class="hidden absolute bottom-16 right-0 bg-white rounded-lg shadow-lg w-80 h-96">
-        <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-            <div class="flex justify-between items-center">
-                <h4 class="font-bold">AI Chat Support</h4>
-                <button id="closeChatbot" class="text-white hover:text-gray-200">×</button>
-            </div>
-        </div>
-        
-        <div id="chatMessages" class="p-4 h-64 overflow-y-auto bg-gray-50">
-            <div class="bg-white p-3 rounded-lg mb-3 shadow-sm">
-                <p class="text-sm">Xin chào! Tôi là chatbot của nhà hàng Ẩm thực Phương Nam. Tôi có thể giúp bạn:</p>
-                <ul class="text-sm mt-2 list-disc list-inside">
-                    <li>Tư vấn thực đơn</li>
-                    <li>Hỗ trợ đặt bàn</li>
-                    <li>Thông tin liên hệ</li>
-                    <li>Khuyến mãi hiện tại</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="p-4 border-t">
-            <div class="flex space-x-2">
-                <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." 
-                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                <button id="sendMessage" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-12">
-    <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-4 gap-8">
-            <div>
-                <h4 class="text-xl font-bold mb-4">Ẩm thực Phương Nam</h4>
-                <p class="text-gray-300 mb-4">Nhà hàng ẩm thực miền Nam uy tín với hơn 13 năm kinh nghiệm.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="bg-blue-600 p-2 rounded hover:bg-blue-700">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="bg-pink-600 p-2 rounded hover:bg-pink-700">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="bg-red-600 p-2 rounded hover:bg-red-700">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div>
-                <h4 class="text-xl font-bold mb-4">Liên kết nhanh</h4>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white">Trang chủ</a></li>
-                    <li><a href="#" class="hover:text-white">Thực đơn</a></li>
-                    <li><a href="#" class="hover:text-white">Đặt bàn</a></li>
-                    <li><a href="#" class="hover:text-white">Liên hệ</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-xl font-bold mb-4">Dịch vụ</h4>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white">Giao hàng tận nơi</a></li>
-                    <li><a href="#" class="hover:text-white">Đặt tiệc</a></li>
-                    <li><a href="#" class="hover:text-white">Catering</a></li>
-                    <li><a href="#" class="hover:text-white">Sự kiện</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-xl font-bold mb-4">Liên hệ</h4>
-                <div class="space-y-2 text-gray-300">
-                    <p><i class="fas fa-map-marker-alt mr-2"></i>123 Đường ABC, Quận 1, TP.HCM</p>
-                    <p><i class="fas fa-phone mr-2"></i>1900 1234</p>
-                    <p><i class="fas fa-envelope mr-2"></i>info@phuongnamrestaurant.com</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>&copy; 2023 Ẩm thực Phương Nam. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
-
-<script>
-// Sample menu data
-const menuData = [
-    { id: 1, name: 'Cơm tấm sườn nướng', price: 85000, category: 'com', description: 'Cơm tấm truyền thống với sườn nướng thơm ngon', available: true },
-    { id: 2, name: 'Cơm tấm bì chả', price: 75000, category: 'com', description: 'Cơm tấm với bì và chả trứng', available: true },
-    { id: 3, name: 'Phở bò tái', price: 65000, category: 'pho', description: 'Phở bò tái truyền thống', available: true },
-    { id: 4, name: 'Bún bò Huế', price: 70000, category: 'pho', description: 'Bún bò Huế cay nồng', available: true },
-    { id: 5, name: 'Gà rán', price: 95000, category: 'mon-chien', description: 'Gà rán giòn tan', available: true },
-    { id: 6, name: 'Cá lóc nướng trui', price: 120000, category: 'nuong', description: 'Cá lóc nướng trui đặc sản miền Tây', available: true },
-    { id: 7, name: 'Gỏi cuốn tôm thịt', price: 45000, category: 'goi', description: 'Gỏi cuốn tươi ngon', available: true },
-    { id: 8, name: 'Nước dừa', price: 25000, category: 'do-uong', description: 'Nước dừa tươi mát', available: true },
-    { id: 9, name: 'Cà ri gà', price: 75000, category: 'com', description: 'Cà ri gà đậm đà hương vị Nam Bộ', available: true },
-    { id: 10, name: 'Bánh xèo', price: 55000, category: 'mon-chien', description: 'Bánh xèo giòn rụm với tôm thịt', available: true }
-];
-
-// Application state
-let cart = [];
-let currentPage = 'home';
-let isLoggedIn = false;
-let currentUser = null;
-let currentAdminTab = 'dishes';
-
-// Initialize application
-document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-});
-
-function initializeApp() {
-    setupNavigation();
-    setupModals();
-    setupCart();
-    setupChatbot();
-    setupAdmin();
-    renderMenu();
-    setupForms();
-}
-
-// Navigation
-function setupNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const page = this.getAttribute('data-page');
-            showPage(page);
-        });
-    });
-}
-
-function showPage(page) {
-    // Hide all pages
-    const pages = document.querySelectorAll('[id$="Page"]');
-    pages.forEach(p => p.classList.add('hidden'));
-    
-    // Show selected page
-    const targetPage = document.getElementById(page + 'Page');
-    if (targetPage) {
-        targetPage.classList.remove('hidden');
-        currentPage = page;
-    }
-    
-    // Update navigation
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.classList.remove('text-red-600');
-        link.classList.add('text-gray-700');
-    });
-    
-    const activeLink = document.querySelector(`[data-page="${page}"]`);
-    if (activeLink) {
-        activeLink.classList.add('text-red-600');
-        activeLink.classList.remove('text-gray-700');
-    }
-}
-
-// Menu functionality
-function renderMenu(filteredData = menuData) {
-    const menuGrid = document.getElementById('menuGrid');
-    menuGrid.innerHTML = '';
-    
-    filteredData.forEach(item => {
-        const menuItem = createMenuItemElement(item);
-        menuGrid.appendChild(menuItem);
-    });
-}
-
-function createMenuItemElement(item) {
-    const div = document.createElement('div');
-    div.className = 'food-card bg-white rounded-lg shadow-lg overflow-hidden';
-    
-    const categoryColors = {
-        'com': 'from-red-400 to-red-600',
-        'pho': 'from-yellow-400 to-orange-600',
-        'mon-chien': 'from-green-400 to-green-600',
-        'nuong': 'from-purple-400 to-purple-600',
-        'goi': 'from-blue-400 to-blue-600',
-        'do-uong': 'from-pink-400 to-pink-600'
-    };
-    
-    const categoryIcons = {
-        'com': 'fas fa-rice',
-        'pho': 'fas fa-bowl-food',
-        'mon-chien': 'fas fa-drumstick-bite',
-        'nuong': 'fas fa-fire',
-        'goi': 'fas fa-leaf',
-        'do-uong': 'fas fa-glass-water'
-    };
-    
-    div.innerHTML = `
-        <div class="h-48 bg-gradient-to-r ${categoryColors[item.category] || 'from-gray-400 to-gray-600'} flex items-center justify-center">
-            <i class="${categoryIcons[item.category] || 'fas fa-utensils'} text-6xl text-white"></i>
-        </div>
-        <div class="p-6">
-            <h4 class="text-xl font-bold mb-2">${item.name}</h4>
-            <p class="text-gray-600 mb-4">${item.description}</p>
-            <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-red-600">${formatPrice(item.price)}</span>
-                <button onclick="addToCart(${item.id})" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 ${!item.available ? 'opacity-50 cursor-not-allowed' : ''}" ${!item.available ? 'disabled' : ''}>
-                    <i class="fas fa-plus mr-2"></i>${item.available ? 'Thêm' : 'Hết món'}
-                </button>
-            </div>
-        </div>
-    `;
-    
-    return div;
-}
-
-// Search and filter functionality
-document.getElementById('searchInput').addEventListener('input', function() {
-    filterMenu();
-});
-
-document.getElementById('categoryFilter').addEventListener('change', function() {
-    filterMenu();
-});
-
-document.querySelectorAll('.category-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const category = this.getAttribute('data-category');
-        
-        // Update active button
-        document.querySelectorAll('.category-btn').forEach(b => {
-            b.classList.remove('bg-red-600', 'text-white');
-            b.classList.add('bg-gray-200', 'text-gray-700');
-        });
-        this.classList.add('bg-red-600', 'text-white');
-        this.classList.remove('bg-gray-200', 'text-gray-700');
-        
-        // Update select
-        document.getElementById('categoryFilter').value = category;
-        filterMenu();
-    });
-});
-
-function filterMenu() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const category = document.getElementById('categoryFilter').value;
-    
-    let filtered = menuData.filter(item => {
-        const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
-                            item.description.toLowerCase().includes(searchTerm);
-        const matchesCategory = !category || item.category === category;
-        return matchesSearch && matchesCategory;
-    });
-    
-    renderMenu(filtered);
-}
-
-// Cart functionality
-function setupCart() {
-    document.getElementById('cartBtn').addEventListener('click', function() {
-        document.getElementById('cartModal').classList.add('active');
-        renderCart();
-    });
-    
-    document.getElementById('closeCart').addEventListener('click', function() {
-        document.getElementById('cartModal').classList.remove('active');
-    });
-    
-    document.getElementById('clearCart').addEventListener('click', function() {
-        cart = [];
-        updateCartDisplay();
-        renderCart();
-    });
-    
-    document.getElementById('checkoutBtn').addEventListener('click', function() {
-        if (cart.length === 0) {
-            alert('Giỏ hàng trống!');
-            return;
-        }
-        
-        // Simulate VNPay checkout
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        if (confirm(`Thanh toán ${formatPrice(total)} qua VNPay?`)) {
-            alert('Đang chuyển hướng đến VNPay...');
-            // Here you would integrate with actual VNPay API
-            cart = [];
-            updateCartDisplay();
-            renderCart();
-            document.getElementById('cartModal').classList.remove('active');
-        }
-    });
-}
-
-function addToCart(itemId) {
-    const item = menuData.find(i => i.id === itemId);
-    if (!item || !item.available) return;
-    
-    const existingItem = cart.find(i => i.id === itemId);
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ ...item, quantity: 1 });
-    }
-    
-    updateCartDisplay();
-    
-    // Show success feedback
-    const btn = event.target.closest('button');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-check mr-2"></i>Đã thêm';
-    btn.classList.add('bg-green-600');
-    setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.classList.remove('bg-green-600');
-    }, 1000);
-}
-
-function removeFromCart(itemId) {
-    cart = cart.filter(item => item.id !== itemId);
-    updateCartDisplay();
-    renderCart();
-}
-
-function updateQuantity(itemId, change) {
-    const item = cart.find(i => i.id === itemId);
-    if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            removeFromCart(itemId);
-        } else {
-            updateCartDisplay();
-            renderCart();
-        }
-    }
-}
-
-function updateCartDisplay() {
-    const cartCount = document.getElementById('cartCount');
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-}
-
-function renderCart() {
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Giỏ hàng trống</p>';
-        cartTotal.textContent = '0₫';
-        return;
-    }
-    
-    cartItems.innerHTML = cart.map(item => `
-        <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
-            <div class="flex-1">
-                <h5 class="font-semibold">${item.name}</h5>
-                <p class="text-red-600 font-bold">${formatPrice(item.price)}</p>
-            </div>
-            <div class="flex items-center space-x-3">
-                <button onclick="updateQuantity(${item.id}, -1)" class="bg-gray-300 text-gray-700 w-8 h-8 rounded-full hover:bg-gray-400">-</button>
-                <span class="font-bold min-w-8 text-center">${item.quantity}</span>
-                <button onclick="updateQuantity(${item.id}, 1)" class="bg-red-600 text-white w-8 h-8 rounded-full hover:bg-red-700">+</button>
-                <button onclick="removeFromCart(${item.id})" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        </div>
-    `).join('');
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = formatPrice(total);
-}
-
-// Modal functionality
-function setupModals() {
-    // Login modal
-    document.getElementById('loginBtn').addEventListener('click', function() {
-        document.getElementById('loginModal').classList.add('active');
-    });
-    
-    document.getElementById('closeLogin').addEventListener('click', function() {
-        document.getElementById('loginModal').classList.remove('active');
-    });
-    
-    document.getElementById('showRegister').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('loginModal').classList.remove('active');
-        document.getElementById('registerModal').classList.add('active');
-    });
-    
-    // Register modal
-    document.getElementById('closeRegister').addEventListener('click', function() {
-        document.getElementById('registerModal').classList.remove('active');
-    });
-    
-    document.getElementById('showLogin').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('registerModal').classList.remove('active');
-        document.getElementById('loginModal').classList.add('active');
-    });
-    
-    // Admin access
-    document.getElementById('adminBtn').addEventListener('click', function() {
-        showPage('admin');
-    });
-    
-    // Close modals when clicking outside
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('active');
-            }
-        });
-    });
-}
-
-// Chatbot functionality
-function setupChatbot() {
-    const chatbotToggle = document.getElementById('chatbotToggle');
-    const chatbotWindow = document.getElementById('chatbotWindow');
-    const closeChatbot = document.getElementById('closeChatbot');
-    const chatInput = document.getElementById('chatInput');
-    const sendMessage = document.getElementById('sendMessage');
-    
-    chatbotToggle.addEventListener('click', function() {
-        chatbotWindow.classList.toggle('hidden');
-    });
-    
-    closeChatbot.addEventListener('click', function() {
-        chatbotWindow.classList.add('hidden');
-    });
-    
-    sendMessage.addEventListener('click', function() {
-        sendChatMessage();
-    });
-    
-    chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            sendChatMessage();
-        }
-    });
-}
-
-function sendChatMessage() {
-    const chatInput = document.getElementById('chatInput');
-    const chatMessages = document.getElementById('chatMessages');
-    const message = chatInput.value.trim();
-    
-    if (!message) return;
-    
-    // Add user message
-    addChatMessage(message, 'user');
-    chatInput.value = '';
-    
-    // Simulate AI response
-    setTimeout(() => {
-        const response = generateChatResponse(message);
-        addChatMessage(response, 'bot');
-    }, 1000);
-}
-
-function addChatMessage(message, sender) {
-    const chatMessages = document.getElementById('chatMessages');
-    const messageDiv = document.createElement('div');
-    
-    if (sender === 'user') {
-        messageDiv.className = 'bg-blue-600 text-white p-3 rounded-lg mb-3 ml-8';
-        messageDiv.innerHTML = `<p class="text-sm">${message}</p>`;
-    } else {
-        messageDiv.className = 'bg-white p-3 rounded-lg mb-3 shadow-sm mr-8';
-        messageDiv.innerHTML = `<p class="text-sm">${message}</p>`;
-    }
-    
-    chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function generateChatResponse(message) {
-    const responses = {
-        'menu': 'Chúng tôi có nhiều món ăn đặc sắc như cơm tấm, phở, bún bò Huế, bánh xèo... Bạn muốn xem thực đơn chi tiết không?',
-        'giá': 'Giá các món ăn của chúng tôi từ 25.000₫ đến 120.000₫. Bạn có thể xem thực đơn để biết giá cụ thể.',
-        'đặt bàn': 'Bạn có thể đặt bàn trực tuyến tại trang "Đặt bàn" hoặc gọi hotline 1900 1234.',
-        'địa chỉ': 'Nhà hàng tọa lạc tại 123 Đường ABC, Quận 1, TP. Hồ Chí Minh.',
-        'giờ mở cửa': 'Chúng tôi mở cửa từ 11:00 - 22:00 hàng ngày.',
-        'giao hàng': 'Chúng tôi có dịch vụ giao hàng tận nơi trong bán kính 10km với phí ship từ 15.000₫.',
-        'default': 'Cảm ơn bạn đã liên hệ! Tôi có thể giúp bạn về thực đơn, đặt bàn, địa chỉ, giờ mở cửa. Bạn cần hỗ trợ gì?'
-    };
-    
-    const lowerMessage = message.toLowerCase();
-    
-    for (const key in responses) {
-        if (lowerMessage.includes(key)) {
-            return responses[key];
-        }
-    }
-    
-    return responses.default;
-}
-
-// Admin functionality
-function setupAdmin() {
-    const adminTabs = document.querySelectorAll('.admin-tab');
-    adminTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const tabName = this.getAttribute('data-tab');
-            showAdminTab(tabName);
-        });
-    });
-    
-    renderDishesTable();
-}
-
-function showAdminTab(tabName) {
-    // Hide all admin content
-    const adminContents = document.querySelectorAll('.admin-content');
-    adminContents.forEach(content => {
-        content.classList.add('hidden');
-    });
-    
-    // Show selected tab
-    const targetContent = document.getElementById('admin' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
-    if (targetContent) {
-        targetContent.classList.remove('hidden');
-        currentAdminTab = tabName;
-    }
-    
-    // Update tab buttons
-    const adminTabs = document.querySelectorAll('.admin-tab');
-    adminTabs.forEach(tab => {
-        if (tab.getAttribute('data-tab') === tabName) {
-            tab.classList.add('ring-4', 'ring-blue-300');
-        } else {
-            tab.classList.remove('ring-4', 'ring-blue-300');
-        }
-    });
-}
-
-function renderDishesTable() {
-    const tbody = document.getElementById('dishesTable');
-    tbody.innerHTML = menuData.map(dish => `
-        <tr class="border-b">
-            <td class="px-4 py-2">${dish.name}</td>
-            <td class="px-4 py-2">${formatPrice(dish.price)}</td>
-            <td class="px-4 py-2">${getCategoryName(dish.category)}</td>
-            <td class="px-4 py-2">
-                <span class="px-2 py-1 rounded-full text-sm ${dish.available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                    ${dish.available ? 'Có sẵn' : 'Hết món'}
-                </span>
-            </td>
-            <td class="px-4 py-2">
-                <button onclick="editDish(${dish.id})" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mr-2">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button onclick="deleteDish(${dish.id})" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
-        </tr>
-    `).join('');
-}
-
-function getCategoryName(category) {
-    const categoryNames = {
-        'com': 'Cơm',
-        'pho': 'Phở & Bún',
-        'mon-chien': 'Món chiên',
-        'nuong': 'Món nướng',
-        'goi': 'Gỏi & Salad',
-        'do-uong': 'Đồ uống'
-    };
-    return categoryNames[category] || category;
-}
-
-function editDish(dishId) {
-    alert(`Chỉnh sửa món ăn ID: ${dishId}`);
-    // Here you would implement the edit functionality
-}
-
-function deleteDish(dishId) {
-    if (confirm('Bạn có chắc muốn xóa món ăn này?')) {
-        const index = menuData.findIndex(dish => dish.id === dishId);
-        if (index > -1) {
-            menuData.splice(index, 1);
-            renderDishesTable();
-            renderMenu();
-            alert('Đã xóa món ăn thành công!');
-        }
-    }
-}
-
-// Form handling
-function setupForms() {
-    // Booking form
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Đặt bàn thành công! Chúng tôi sẽ liên hệ xác nhận trong ít phút.');
-        this.reset();
-    });
-    
-    // Contact form
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.');
-        this.reset();
-    });
-    
-    // Login form
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Đăng nhập thành công!');
-        document.getElementById('loginModal').classList.remove('active');
-        isLoggedIn = true;
-        updateAuthUI();
-    });
-    
-    // Register form
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Đăng ký thành công!');
-        document.getElementById('registerModal').classList.remove('active');
-    });
-    
-    // Add dish form
-    document.getElementById('addDishForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-        const newDish = {
-            id: menuData.length + 1,
-            name: this.elements[0].value,
-            price: parseInt(this.elements[1].value),
-            category: this.elements[2].value,
-            available: this.elements[3].value === 'available',
-            description: this.elements[4].value
-        };
-        
-        menuData.push(newDish);
-        renderDishesTable();
-        renderMenu();
-        this.reset();
-        alert('Đã thêm món ăn mới thành công!');
-    });
-}
-
-function updateAuthUI() {
-    const loginBtn = document.getElementById('loginBtn');
-    if (isLoggedIn) {
-        loginBtn.innerHTML = '<i class="fas fa-user mr-2"></i>Xin chào!';
-        loginBtn.classList.add('bg-green-600');
-        loginBtn.classList.remove('bg-blue-600');
-    }
-}
-
-// Utility functions
-function formatPrice(price) {
-    return price.toLocaleString('vi-VN') + '₫';
-}
-
-// Initialize the application
-showPage('home');
-</script>
-
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9762c4d0bde6e2f7","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.8.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
 </body>
 </html>
