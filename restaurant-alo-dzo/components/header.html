@@ -20,53 +20,86 @@
         <div class="flex items-center justify-between py-4">
             <!-- Logo -->
             <div class="flex items-center">
-                <div class="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center mr-3">
-                    <i class="fas fa-utensils text-white text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold brand-primary">Ẩm Thực Phương Nam</h1>
-                    <p class="text-sm text-gray-600">Đặc sản miền Nam</p>
-                </div>
+                <a href="index.html" class="flex items-center">
+                    <div class="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-utensils text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold brand-primary">Ẩm Thực Phương Nam</h1>
+                        <p class="text-sm text-gray-600">Đặc sản miền Nam</p>
+                    </div>
+                </a>
             </div>
 
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-2xl mx-8">
-                <div class="relative">
-                    <input 
-                        type="text" 
-                        id="searchInput"
-                        placeholder="Tìm kiếm món ăn, combo, thức uống..."
-                        class="w-full py-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-primary"
-                    >
-                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
-                        <i class="fas fa-search text-gray-400"></i>
-                    </button>
-                    <!-- Search Suggestions -->
-                    <div id="searchSuggestions" class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 hidden">
-                        <div class="p-2">
-                            <div class="text-xs text-gray-500 mb-2">Gợi ý tìm kiếm:</div>
-                            <div class="space-y-1">
-                                <div class="p-2 hover:bg-gray-100 cursor-pointer rounded">Bánh xèo miền Tây</div>
-                                <div class="p-2 hover:bg-gray-100 cursor-pointer rounded">Cơm tấm sườn nướng</div>
-                                <div class="p-2 hover:bg-gray-100 cursor-pointer rounded">Hủ tiếu Nam Vang</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Navigation -->
+            <nav class="hidden lg:flex space-x-8" id="main-navigation">
+                <a href="index.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="home">
+                    <i class="fas fa-home mr-2"></i>Trang chủ
+                </a>
+                <a href="about.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="about">
+                    <i class="fas fa-info-circle mr-2"></i>Giới thiệu
+                </a>
+                <a href="menu.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="menu">
+                    <i class="fas fa-utensils mr-2"></i>Thực đơn
+                </a>
+                <a href="album.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="album">
+                    <i class="fas fa-images mr-2"></i>Album
+                </a>
+                <a href="booking.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="booking">
+                    <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
+                </a>
+                <a href="contact.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="contact">
+                    <i class="fas fa-phone mr-2"></i>Liên hệ
+                </a>
+                <a href="admin.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="admin">
+                    <i class="fas fa-cog mr-2"></i>Admin
+                </a>
+            </nav>
 
             <!-- Right Menu -->
             <div class="flex items-center space-x-4">
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-gray-700 hover:text-brand-primary">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
                 <button onclick="toggleAuth()" class="flex items-center text-gray-700 hover:text-brand-primary">
                     <i class="fas fa-user mr-2"></i>
                     <span class="hidden md:block">Đăng nhập</span>
                 </button>
-                
+
                 <button onclick="toggleCart()" class="relative flex items-center text-gray-700 hover:text-brand-primary">
                     <i class="fas fa-shopping-cart mr-2"></i>
                     <span class="hidden md:block">Giỏ hàng</span>
                     <span id="cartBadge" class="absolute -top-2 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
                 </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="lg:hidden border-t border-gray-200 hidden">
+            <div class="py-4 space-y-2">
+                <a href="index.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="home">
+                    <i class="fas fa-home mr-2"></i>Trang chủ
+                </a>
+                <a href="about.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="about">
+                    <i class="fas fa-info-circle mr-2"></i>Giới thiệu
+                </a>
+                <a href="menu.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="menu">
+                    <i class="fas fa-utensils mr-2"></i>Thực đơn
+                </a>
+                <a href="album.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="album">
+                    <i class="fas fa-images mr-2"></i>Album
+                </a>
+                <a href="booking.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="booking">
+                    <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
+                </a>
+                <a href="contact.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="contact">
+                    <i class="fas fa-phone mr-2"></i>Liên hệ
+                </a>
+                <a href="admin.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="admin">
+                    <i class="fas fa-cog mr-2"></i>Admin
+                </a>
             </div>
         </div>
     </div>

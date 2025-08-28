@@ -12,45 +12,282 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize Application
 function initializeApp() {
-    loadComponents();
-    updateCartBadge();
-    showSection('home');
-    setupSearchFunctionality();
-    setupEventListeners();
-    renderMenuItems();
-    renderBestSellers();
+    // Auto-detect page and initialize
+    const pageName = detectCurrentPage();
+    initializePage(pageName);
 }
 
-// Load Components
-async function loadComponents() {
+// Detect current page from URL
+function detectCurrentPage() {
+    const path = window.location.pathname;
+    const filename = path.split('/').pop() || 'index.html';
+
+    if (filename === '' || filename === 'index.html') return 'home';
+    if (filename === 'about.html') return 'about';
+    if (filename === 'menu.html') return 'menu';
+    if (filename === 'album.html') return 'album';
+    if (filename === 'booking.html') return 'booking';
+    if (filename === 'contact.html') return 'contact';
+    if (filename === 'admin.html') return 'admin';
+
+    return 'home'; // default
+}
+
+// Initialize specific page
+async function initializePage(pageName) {
     try {
+        // Load common components for all pages
+        await loadCommonComponents();
+
+        // Load page-specific components and setup
+        switch(pageName) {
+            case 'home':
+                await loadHomePageComponents();
+                setupHomePage();
+                break;
+            case 'menu':
+                await loadMenuPageComponents();
+                setupMenuPage();
+                break;
+            case 'album':
+                await loadAlbumPageComponents();
+                setupAlbumPage();
+                break;
+            case 'admin':
+                await loadAdminPageComponents();
+                setupAdminPage();
+                break;
+            default:
+                await loadBasicPageComponents();
+                setupBasicPage();
+        }
+
+        // Common setup for all pages
+        updateCartBadge();
+        setupEventListeners();
+        setActiveNavigation(pageName);
+
+    } catch (error) {
+        console.error('Error initializing page:', error);
+    }
+}
+
+// Set active navigation item
+function setActiveNavigation(pageName) {
+    // Wait for header to load
+    setTimeout(() => {
+        const navItems = document.querySelectorAll('#main-navigation .nav-item');
+        const mobileNavItems = document.querySelectorAll('#mobileMenu .nav-item');
+
+        // Remove active class from all items
+        [...navItems, ...mobileNavItems].forEach(item => {
+            item.classList.remove('nav-active');
+            item.classList.add('hover:bg-gray-100');
+        });
+
+        // Add active class to current page
+        const activeItems = document.querySelectorAll(`[data-page="${pageName}"]`);
+        activeItems.forEach(item => {
+            item.classList.add('nav-active');
+            item.classList.remove('hover:bg-gray-100');
+        });
+    }, 100);
+}
+
+// Load common components for all pages
+async function loadCommonComponents() {
+    try {
+        // Load Top Bar
+        const topbarResponse = await fetch('components/topbar.html');
+        const topbarHTML = await topbarResponse.text();
+        const topbarContainer = document.getElementById('topbar-container');
+        if (topbarContainer) topbarContainer.innerHTML = topbarHTML;
+
         // Load Header
         const headerResponse = await fetch('components/header.html');
         const headerHTML = await headerResponse.text();
-        document.getElementById('header-container').innerHTML = headerHTML;
-
-        // Load Navigation
-        const navResponse = await fetch('components/navigation.html');
-        const navHTML = await navResponse.text();
-        document.getElementById('navigation-container').innerHTML = navHTML;
+        const headerContainer = document.getElementById('header-container');
+        if (headerContainer) headerContainer.innerHTML = headerHTML;
 
         // Load Footer
         const footerResponse = await fetch('components/footer.html');
         const footerHTML = await footerResponse.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
+        const footerContainer = document.getElementById('footer-container');
+        if (footerContainer) footerContainer.innerHTML = footerHTML;
+
+        // Load Cart
+        const cartResponse = await fetch('components/cart.html');
+        const cartHTML = await cartResponse.text();
+        const cartContainer = document.getElementById('cart-container');
+        if (cartContainer) cartContainer.innerHTML = cartHTML;
+
+    } catch (error) {
+        console.error('Error loading common components:', error);
+    }
+}
+
+// Load components for homepage
+async function loadHomePageComponents() {
+    try {
+        // Load Modal
+        const modalResponse = await fetch('components/modal.html');
+        const modalHTML = await modalResponse.text();
+        const modalContainer = document.getElementById('modal-container');
+        if (modalContainer) modalContainer.innerHTML = modalHTML;
+
+    } catch (error) {
+        console.error('Error loading home page components:', error);
+    }
+}
+
+// Load components for menu page
+async function loadMenuPageComponents() {
+    try {
+        // Load Modal
+        const modalResponse = await fetch('components/modal.html');
+        const modalHTML = await modalResponse.text();
+        const modalContainer = document.getElementById('modal-container');
+        if (modalContainer) modalContainer.innerHTML = modalHTML;
+
+    } catch (error) {
+        console.error('Error loading menu page components:', error);
+    }
+}
+
+// Load components for album page
+async function loadAlbumPageComponents() {
+    try {
+        // Load Modal for lightbox
+        const modalResponse = await fetch('components/modal.html');
+        const modalHTML = await modalResponse.text();
+        const modalContainer = document.getElementById('modal-container');
+        if (modalContainer) modalContainer.innerHTML = modalHTML;
+
+    } catch (error) {
+        console.error('Error loading album page components:', error);
+    }
+}
+
+// Load components for admin page
+async function loadAdminPageComponents() {
+    try {
+        // Load Admin Panel
+        const adminResponse = await fetch('components/admin-panel.html');
+        const adminHTML = await adminResponse.text();
+        const adminContainer = document.getElementById('admin-panel-container');
+        if (adminContainer) adminContainer.innerHTML = adminHTML;
 
         // Load Modal
         const modalResponse = await fetch('components/modal.html');
         const modalHTML = await modalResponse.text();
-        document.getElementById('modal-container').innerHTML = modalHTML;
-
-        // Load Admin Panel
-        const adminResponse = await fetch('components/admin-panel.html');
-        const adminHTML = await adminResponse.text();
-        document.getElementById('admin-panel-container').innerHTML = adminHTML;
+        const modalContainer = document.getElementById('modal-container');
+        if (modalContainer) modalContainer.innerHTML = modalHTML;
 
     } catch (error) {
-        console.error('Error loading components:', error);
+        console.error('Error loading admin page components:', error);
+    }
+}
+
+// Load basic components for other pages
+async function loadBasicPageComponents() {
+    try {
+        // Just load modal for basic functionality
+        const modalResponse = await fetch('components/modal.html');
+        const modalHTML = await modalResponse.text();
+        const modalContainer = document.getElementById('modal-container');
+        if (modalContainer) modalContainer.innerHTML = modalHTML;
+
+    } catch (error) {
+        console.error('Error loading basic page components:', error);
+    }
+}
+
+// Setup functions for each page type
+function setupHomePage() {
+    // Render best sellers
+    setTimeout(() => {
+        renderBestSellers();
+    }, 100);
+}
+
+function setupMenuPage() {
+    // Setup menu search functionality
+    setupMenuSearchFunctionality();
+    // Render menu items
+    setTimeout(() => {
+        renderMenuItems();
+    }, 100);
+}
+
+function setupAlbumPage() {
+    // Setup album filtering
+    setupAlbumFiltering();
+}
+
+function setupAdminPage() {
+    // Setup admin functionality
+    setupAdminFunctionality();
+}
+
+function setupBasicPage() {
+    // Basic page setup - no special functionality needed
+}
+
+// Setup menu search functionality
+function setupMenuSearchFunctionality() {
+    const searchInput = document.getElementById('menuSearchInput');
+    const searchSuggestions = document.getElementById('menuSearchSuggestions');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            if (query.length > 0) {
+                searchSuggestions.classList.remove('hidden');
+                // Filter menu items based on search
+                filterMenuBySearch(query);
+            } else {
+                searchSuggestions.classList.add('hidden');
+                // Show all items
+                renderMenuItems();
+            }
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                searchSuggestions.classList.add('hidden');
+            }
+        });
+    }
+}
+
+// Setup album filtering
+function setupAlbumFiltering() {
+    // Album filter functionality will be handled by existing filterAlbum function
+}
+
+// Setup admin functionality
+function setupAdminFunctionality() {
+    // Admin functionality will be handled by existing admin functions
+}
+
+// Filter menu by search query
+function filterMenuBySearch(query) {
+    if (typeof menuItemsData === 'undefined') return;
+
+    const filteredItems = menuItemsData.filter(item =>
+        item.name.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+    );
+
+    const menuGrid = document.getElementById('menuGrid');
+    if (menuGrid) {
+        menuGrid.innerHTML = '';
+        filteredItems.forEach(item => {
+            const itemHTML = createMenuItem(item);
+            menuGrid.insertAdjacentHTML('beforeend', itemHTML);
+        });
     }
 }
 
@@ -387,6 +624,12 @@ function renderBestSellers() {
     const bestSellersGrid = document.getElementById('bestSellersGrid');
     if (!bestSellersGrid) return;
 
+    // Check if menuItemsData is available
+    if (typeof menuItemsData === 'undefined') {
+        console.warn('menuItemsData not available, loading from components.js');
+        return;
+    }
+
     const bestSellers = menuItemsData.slice(0, 4); // Get first 4 items as best sellers
 
     bestSellersGrid.innerHTML = '';
@@ -592,20 +835,51 @@ function showToast(message) {
 }
 
 function setupSearchFunctionality() {
-    const searchInput = document.getElementById('searchInput');
-    const searchSuggestions = document.getElementById('searchSuggestions');
-    
-    if (searchInput && searchSuggestions) {
-        searchInput.addEventListener('focus', () => {
-            searchSuggestions.classList.remove('hidden');
+    // Menu search functionality
+    const menuSearchInput = document.getElementById('menuSearchInput');
+    const menuSearchSuggestions = document.getElementById('menuSearchSuggestions');
+
+    if (menuSearchInput && menuSearchSuggestions) {
+        menuSearchInput.addEventListener('focus', () => {
+            menuSearchSuggestions.classList.remove('hidden');
         });
-        
-        searchInput.addEventListener('blur', () => {
+
+        menuSearchInput.addEventListener('blur', () => {
             setTimeout(() => {
-                searchSuggestions.classList.add('hidden');
+                menuSearchSuggestions.classList.add('hidden');
             }, 200);
         });
+
+        // Search functionality
+        menuSearchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filterMenuBySearch(searchTerm);
+        });
     }
+}
+
+// Mobile menu toggle
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('hidden');
+    }
+}
+
+// Filter menu by search term
+function filterMenuBySearch(searchTerm) {
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(item => {
+        const itemName = item.querySelector('h3').textContent.toLowerCase();
+        const itemDescription = item.querySelector('p') ? item.querySelector('p').textContent.toLowerCase() : '';
+
+        if (itemName.includes(searchTerm) || itemDescription.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = searchTerm === '' ? 'block' : 'none';
+        }
+    });
 }
 
 function setupEventListeners() {

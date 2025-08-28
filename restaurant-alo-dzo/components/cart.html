@@ -1,0 +1,32 @@
+<!-- Shopping Cart Slide-over -->
+<div id="cartOverlay" class="overlay fixed inset-0 z-40"></div>
+<div id="cartSlide" class="cart-slide fixed right-0 top-0 h-full w-96 bg-white shadow-xl z-50 p-6">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold">Giỏ hàng</h2>
+        <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+    </div>
+
+    <div id="cartItems" class="space-y-4 mb-6 max-h-96 overflow-y-auto">
+        <!-- Cart items will be populated by JavaScript -->
+    </div>
+
+    <div class="border-t pt-4">
+        <div class="flex justify-between items-center mb-4">
+            <span class="font-semibold">Tổng cộng:</span>
+            <span id="cartTotal" class="text-xl font-bold text-red-500">0đ</span>
+        </div>
+        
+        <div class="space-y-2">
+            <input type="text" placeholder="Mã giảm giá" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+            <button class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300">
+                Áp dụng mã
+            </button>
+        </div>
+        
+        <button onclick="checkout()" class="w-full bg-brand-primary text-white py-3 rounded-lg font-semibold mt-4 hover:bg-blue-600">
+            <i class="fas fa-credit-card mr-2"></i>Thanh toán VNPAY
+        </button>
+    </div>
+</div>

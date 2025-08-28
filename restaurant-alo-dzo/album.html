@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album ảnh - Ẩm Thực Phương Nam</title>
+    <meta name="description" content="Khám phá album ảnh món ăn, không gian nhà hàng và các sự kiện tại Ẩm Thực Phương Nam">
+    <meta property="og:title" content="Album ảnh - Ẩm Thực Phương Nam">
+    <meta property="og:description" content="Hình ảnh đẹp về món ăn, không gian và hoạt động tại nhà hàng">
+    <meta property="og:type" content="restaurant">
+
+    <!-- External CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Top Bar Component -->
+    <div id="topbar-container"></div>
+
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold text-center mb-8 brand-primary">Album ảnh</h1>
+            
+            <!-- Filter Tabs -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-2">
+                    <button onclick="filterAlbum('all')" class="album-filter active px-4 py-2 rounded-lg mx-1 bg-brand-primary text-white">
+                        Tất cả
+                    </button>
+                    <button onclick="filterAlbum('food')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                        Món ăn
+                    </button>
+                    <button onclick="filterAlbum('restaurant')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                        Không gian
+                    </button>
+                    <button onclick="filterAlbum('events')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                        Sự kiện
+                    </button>
+                    <button onclick="filterAlbum('customers')" class="album-filter px-4 py-2 rounded-lg mx-1 hover:bg-gray-100">
+                        Khách hàng
+                    </button>
+                </div>
+            </div>
+
+            <!-- Masonry Gallery -->
+            <div class="masonry" id="albumGallery">
+                <!-- Food Images -->
+                <div class="album-item food" onclick="openLightbox(0)">
+                    <div class="w-full h-64 bg-gradient-to-br from-yellow-100 to-orange-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-bowl-rice text-6xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Cơm tấm sườn nướng</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item food" onclick="openLightbox(1)">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-100 to-yellow-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-cookie-bite text-5xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Bánh xèo miền Tây</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item food" onclick="openLightbox(2)">
+                    <div class="w-full h-72 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-bowl-food text-6xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Hủ tiếu Nam Vang</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Images -->
+                <div class="album-item restaurant" onclick="openLightbox(3)">
+                    <div class="w-full h-56 bg-gradient-to-br from-brown-100 to-orange-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-store text-5xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Mặt tiền nhà hàng</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item restaurant" onclick="openLightbox(4)">
+                    <div class="w-full h-64 bg-gradient-to-br from-red-100 to-pink-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-chair text-6xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Không gian bàn ăn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item restaurant" onclick="openLightbox(5)">
+                    <div class="w-full h-40 bg-gradient-to-br from-gray-100 to-blue-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-utensils text-4xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Bếp chế biến</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Images -->
+                <div class="album-item events" onclick="openLightbox(6)">
+                    <div class="w-full h-60 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-birthday-cake text-6xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Tiệc sinh nhật</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item events" onclick="openLightbox(7)">
+                    <div class="w-full h-52 bg-gradient-to-br from-gold-100 to-yellow-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-glass-cheers text-5xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Tiệc công ty</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Images -->
+                <div class="album-item customers" onclick="openLightbox(8)">
+                    <div class="w-full h-44 bg-gradient-to-br from-teal-100 to-green-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-users text-5xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Gia đình khách hàng</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item customers" onclick="openLightbox(9)">
+                    <div class="w-full h-68 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-smile text-6xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Khách hàng vui vẻ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item food" onclick="openLightbox(10)">
+                    <div class="w-full h-56 bg-gradient-to-br from-pink-100 to-red-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-glass-water text-5xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Thức uống tươi mát</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-item restaurant" onclick="openLightbox(11)">
+                    <div class="w-full h-48 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+                        <div class="text-center">
+                            <i class="fas fa-couch text-4xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-semibold">Khu vực chờ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-utensils text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Ẩm Thực Phương Nam</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Hương vị đặc sản miền Nam - Giao hàng tận nơi</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span class="text-sm text-gray-400">123 Nguyễn Huệ, Q.1, TP.HCM</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span class="text-sm text-gray-400">0123-456-789</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span class="text-sm text-gray-400">info@amthucphuongnam.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Liên kết nhanh</h4>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">Giới thiệu</a></li>
+                        <li><a href="menu.html" class="text-gray-400 hover:text-white">Thực đơn</a></li>
+                        <li><a href="booking.html" class="text-gray-400 hover:text-white">Đặt bàn</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Liên hệ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Dịch vụ</h4>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400">Ăn tại chỗ</span></li>
+                        <li><span class="text-gray-400">Giao hàng tận nơi</span></li>
+                        <li><span class="text-gray-400">Đặt tiệc</span></li>
+                        <li><span class="text-gray-400">Catering</span></li>
+                        <li><span class="text-gray-400">Đặt bàn online</span></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Mạng xã hội</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center hover:bg-pink-600">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">Theo dõi để cập nhật khuyến mãi mới nhất!</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2023 Ẩm Thực Phương Nam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- Shopping Cart Component -->
+    <div id="cart-container"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

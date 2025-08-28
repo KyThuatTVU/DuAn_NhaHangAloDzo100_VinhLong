@@ -3,26 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ẩm Thực Phương Nam - Restaurant & Food Delivery</title>
+    <title>Trang chủ - Ẩm Thực Phương Nam</title>
     <meta name="description" content="Nhà hàng Ẩm Thực Phương Nam - Đặc sản miền Nam, đặt bàn online, giao hàng tận nơi">
-    <meta property="og:title" content="Ẩm Thực Phương Nam - Restaurant & Food Delivery">
+    <meta property="og:title" content="Trang chủ - Ẩm Thực Phương Nam">
     <meta property="og:description" content="Trải nghiệm hương vị đặc sản miền Nam authentic tại Ẩm Thực Phương Nam">
     <meta property="og:type" content="restaurant">
-    
+
     <!-- External CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body class="bg-gray-50">
-    <!-- Header Component -->
-    <div id="header-container"></div>
-    
-    <!-- Navigation Component -->
-    <div id="navigation-container"></div>
+    <!-- Top Bar -->
+    <div class="bg-brand-primary text-white py-2 text-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span><i class="fas fa-phone mr-1"></i> 0123-456-789</span>
+                    <span><i class="fas fa-envelope mr-1"></i> info@amthucphuongnam.com</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span>Miễn phí giao hàng cho đơn từ 200k</span>
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <div class="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-utensils text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold brand-primary">Ẩm Thực Phương Nam</h1>
+                            <p class="text-sm text-gray-600">Đặc sản miền Nam</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden lg:flex space-x-8">
+                    <a href="index.html" class="nav-item nav-active px-3 py-2 rounded font-medium transition-colors">
+                        <i class="fas fa-home mr-2"></i>Trang chủ
+                    </a>
+                    <a href="about.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-info-circle mr-2"></i>Giới thiệu
+                    </a>
+                    <a href="menu.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-utensils mr-2"></i>Thực đơn
+                    </a>
+                    <a href="album.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-images mr-2"></i>Album
+                    </a>
+                    <a href="booking.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
+                    </a>
+                    <a href="contact.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-phone mr-2"></i>Liên hệ
+                    </a>
+                    <a href="admin.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-cog mr-2"></i>Admin
+                    </a>
+                </nav>
+
+                <!-- Right Menu -->
+                <div class="flex items-center space-x-4">
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="lg:hidden text-gray-700 hover:text-brand-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+
+                    <button onclick="toggleAuth()" class="flex items-center text-gray-700 hover:text-brand-primary">
+                        <i class="fas fa-user mr-2"></i>
+                        <span class="hidden md:block">Đăng nhập</span>
+                    </button>
+
+                    <button onclick="toggleCart()" class="relative flex items-center text-gray-700 hover:text-brand-primary">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        <span class="hidden md:block">Giỏ hàng</span>
+                        <span id="cartBadge" class="absolute -top-2 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="lg:hidden border-t border-gray-200 hidden">
+                <div class="py-4 space-y-2">
+                    <a href="index.html" class="nav-item nav-active w-full text-left px-3 py-2 rounded font-medium transition-colors block">
+                        <i class="fas fa-home mr-2"></i>Trang chủ
+                    </a>
+                    <a href="about.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
+                        <i class="fas fa-info-circle mr-2"></i>Giới thiệu
+                    </a>
+                    <a href="menu.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
+                        <i class="fas fa-utensils mr-2"></i>Thực đơn
+                    </a>
+                    <a href="album.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
+                        <i class="fas fa-images mr-2"></i>Album
+                    </a>
+                    <a href="booking.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
+                        <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
+                    </a>
+                    <a href="contact.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
+                        <i class="fas fa-phone mr-2"></i>Liên hệ
+                    </a>
+                    <a href="admin.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
+                        <i class="fas fa-cog mr-2"></i>Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <!-- Main Content -->
     <main>
@@ -36,12 +137,12 @@
                         <h1 class="text-5xl font-bold mb-4">Ẩm Thực Phương Nam</h1>
                         <p class="text-xl mb-8">Hương vị đặc sản miền Nam - Giao hàng tận nơi</p>
                         <div class="space-x-4">
-                            <button onclick="showSection('menu')" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale">
+                            <a href="menu.html" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
                                 Xem thực đơn
-                            </button>
-                            <button onclick="showSection('booking')" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors">
+                            </a>
+                            <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors inline-block">
                                 Đặt bàn ngay
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -57,29 +158,47 @@
             <div class="container mx-auto px-4 py-12">
                 <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Danh mục nổi bật</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="text-center group cursor-pointer" onclick="filterMenu('com-tam')">
+                    <a href="menu.html" class="text-center group cursor-pointer block">
                         <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-bowl-rice text-white text-2xl"></i>
                         </div>
                         <h3 class="font-semibold">Cơm tấm</h3>
-                    </div>
-                    <div class="text-center group cursor-pointer" onclick="filterMenu('banh-xeo')">
+                    </a>
+                    <a href="menu.html" class="text-center group cursor-pointer block">
                         <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-cookie-bite text-white text-2xl"></i>
                         </div>
                         <h3 class="font-semibold">Bánh xèo</h3>
-                    </div>
-                    <div class="text-center group cursor-pointer" onclick="filterMenu('hu-tieu')">
+                    </a>
+                    <a href="menu.html" class="text-center group cursor-pointer block">
                         <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-mortar-pestle text-white text-2xl"></i>
                         </div>
                         <h3 class="font-semibold">Hủ tiếu</h3>
-                    </div>
-                    <div class="text-center group cursor-pointer" onclick="filterMenu('nuoc-uong')">
+                    </a>
+                    <a href="menu.html" class="text-center group cursor-pointer block">
                         <div class="w-20 h-20 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-glass-cheers text-white text-2xl"></i>
                         </div>
                         <h3 class="font-semibold">Thức uống</h3>
+                    </a>
+                </div>
+            </div>
+
+          
+
+            <!-- CTA Section -->
+            <div class="bg-brand-primary text-white py-12">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-4">Đặt hàng ngay hôm nay!</h2>
+                    <p class="text-xl mb-8">Giao hàng miễn phí cho đơn từ 200k trong bán kính 5km</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="menu.html" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
+                            Đặt món ngay
+                        </a>
+                        <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors inline-block">
+                            Đặt bàn trước
+                        </a>
                     </div>
                 </div>
             </div>
@@ -107,141 +226,110 @@
                 </div>
             </div>
 
-             <!-- Best Sellers -->
-            <div class="container mx-auto px-4 py-12">
-                <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Món ăn bán chạy</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
-                        <div class="relative">
-                            <div class="w-full h-48 bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
-                                <i class="fas fa-utensils text-6xl text-gray-300"></i>
-                            </div>
-                            <div class="absolute top-2 left-2 badge-sale text-white px-2 py-1 rounded-lg text-xs font-bold">
-                                -20%
-                            </div>
-                            <div class="absolute top-2 right-2 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center">
-                                <i class="fas fa-heart text-sm"></i>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold mb-2">Cơm tấm sườn nướng</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="star-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-sm text-gray-600 ml-2">(4.5) 127 đánh giá</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <span class="text-red-500 font-bold">65.000đ</span>
-                                    <span class="text-gray-400 line-through ml-2">80.000đ</span>
-                                </div>
-                                <button onclick="addToCart('com-tam-suon', 65000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
-                                    <i class="fas fa-plus mr-1"></i>Thêm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Best Sellers -->
+<div class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Món ăn bán chạy</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
-                        <div class="relative">
-                            <div class="w-full h-48 bg-gradient-to-br from-green-100 to-yellow-100 flex items-center justify-center">
-                                <i class="fas fa-leaf text-6xl text-gray-300"></i>
-                            </div>
-                            <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
-                                HOT
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold mb-2">Bánh xèo miền Tây</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="star-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span class="text-sm text-gray-600 ml-2">(5.0) 89 đánh giá</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <span class="text-red-500 font-bold">45.000đ</span>
-                                </div>
-                                <button onclick="addToCart('banh-xeo', 45000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
-                                    <i class="fas fa-plus mr-1"></i>Thêm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
-                        <div class="relative">
-                            <div class="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                                <i class="fas fa-bowl-food text-6xl text-gray-300"></i>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold mb-2">Hủ tiếu Nam Vang</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="star-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <span class="text-sm text-gray-600 ml-2">(4.2) 56 đánh giá</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <span class="text-red-500 font-bold">38.000đ</span>
-                                </div>
-                                <button onclick="addToCart('hu-tieu', 38000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
-                                    <i class="fas fa-plus mr-1"></i>Thêm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
-                        <div class="relative">
-                            <div class="w-full h-48 bg-gradient-to-br from-pink-100 to-red-100 flex items-center justify-center">
-                                <i class="fas fa-glass-water text-6xl text-gray-300"></i>
-                            </div>
-                            <div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
-                                MỚI
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold mb-2">Nước mía tươi</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="star-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span class="text-sm text-gray-600 ml-2">(5.0) 23 đánh giá</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <span class="text-red-500 font-bold">15.000đ</span>
-                                </div>
-                                <button onclick="addToCart('nuoc-mia', 15000)" class="bg-brand-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
-                                    <i class="fas fa-plus mr-1"></i>Thêm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Món 1 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+            <div class="relative">
+                <img src="images/TomSot.jpg" alt="Tôm sốt chanh dây" class="w-full h-48 object-cover">
+                <div class="absolute top-2 left-2 badge-sale text-white px-2 py-1 rounded-lg text-xs font-bold bg-red-500">
+                    -20%
+                </div>
+                <div class="absolute top-2 right-2 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center">
+                    <i class="fas fa-heart text-sm"></i>
                 </div>
             </div>
+            <div class="p-4">
+                <h3 class="font-semibold mb-2">Tôm sốt chanh dây</h3>
+                <div class="flex items-center mb-2">
+                    <div class="star-rating text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-sm text-gray-600 ml-2">(4.5) 127 đánh giá</span>
+                </div>
+                <div>
+                    <span class="text-red-500 font-bold">65.000đ</span>
+                    <span class="text-gray-400 line-through ml-2">80.000đ</span>
+                </div>
+            </div>
+        </div>
 
+        <!-- Món 2 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+            <div class="relative">
+                <img src="images/chagioPN.jpg" alt="Chả giò Phương Nam" class="w-full h-48 object-cover">
+                <div class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
+                    HOT
+                </div>
+            </div>
+            <div class="p-4">
+                <h3 class="font-semibold mb-2">Chả giò Phương Nam</h3>
+                <div class="flex items-center mb-2">
+                    <div class="star-rating text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-sm text-gray-600 ml-2">(5.0) 89 đánh giá</span>
+                </div>
+                <div>
+                    <span class="text-red-500 font-bold">45.000đ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Món 3 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+            <div class="relative">
+                <img src="images/CaNuong.jpg" alt="Cà nướng Phương Nam" class="w-full h-48 object-cover">
+            </div>
+            <div class="p-4">
+                <h3 class="font-semibold mb-2">Cà nướng Phương Nam</h3>
+                <div class="flex items-center mb-2">
+                    <div class="star-rating text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <span class="text-sm text-gray-600 ml-2">(4.2) 56 đánh giá</span>
+                </div>
+                <div>
+                    <span class="text-red-500 font-bold">38.000đ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Món 4 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
+            <div class="relative">
+                <img src="images/GoiTep.jpg" alt="Tép rong cháy sả" class="w-full h-48 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-lg text-xs font-bold">
+                    MỚI
+                </div>
+            </div>
+            <div class="p-4">
+                <h3 class="font-semibold mb-2">Tép rong cháy sả Phương Nam</h3>
+                <div class="flex items-center mb-2">
+                    <div class="star-rating text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-sm text-gray-600 ml-2">(5.0) 23 đánh giá</span>
+                </div>
+                <div>
+                    <span class="text-red-500 font-bold">15.000đ</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
             <!-- Reviews -->
             <div class="bg-white py-12">
@@ -294,96 +382,15 @@
                     <h2 class="text-3xl font-bold mb-4">Đặt hàng ngay hôm nay!</h2>
                     <p class="text-xl mb-8">Giao hàng miễn phí cho đơn từ 200k trong bán kính 5km</p>
                     <div class="flex justify-center space-x-4">
-                        <button onclick="showSection('menu')" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale">
+                        <a href="menu.html" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
                             Đặt món ngay
-                        </button>
-                        <button onclick="showSection('booking')" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors">
+                        </a>
+                        <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors inline-block">
                             Đặt bàn trước
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- ABOUT SECTION -->
-        <section id="about-section" class="section-hidden">
-            <div id="about-content"></div>
-        </section>
-
-        <!-- MENU SECTION -->
-        <section id="menu-section" class="section-hidden">
-            <div class="container mx-auto px-4 py-8">
-                <h1 class="text-3xl font-bold text-center mb-8 brand-primary">Thực đơn</h1>
-                
-                <!-- Filter & Search -->
-                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                        <!-- Category Filter -->
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="filterMenuCategory('all')" class="category-filter active bg-brand-primary text-white px-4 py-2 rounded-lg text-sm">
-                                Tất cả
-                            </button>
-                            <button onclick="filterMenuCategory('com-tam')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
-                                Cơm tấm
-                            </button>
-                            <button onclick="filterMenuCategory('banh-xeo')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
-                                Bánh xèo
-                            </button>
-                            <button onclick="filterMenuCategory('hu-tieu')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
-                                Hủ tiếu
-                            </button>
-                            <button onclick="filterMenuCategory('nuoc-uong')" class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">
-                                Thức uống
-                            </button>
-                        </div>
-                        
-                        <!-- Sort & Price Filter -->
-                        <div class="flex items-center gap-4">
-                            <select id="sortMenu" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="sortMenu()">
-                                <option value="default">Sắp xếp theo</option>
-                                <option value="price-asc">Giá tăng dần</option>
-                                <option value="price-desc">Giá giảm dần</option>
-                                <option value="rating">Đánh giá cao</option>
-                                <option value="popular">Phổ biến</option>
-                            </select>
-                            
-                            <select id="priceFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="filterByPrice()">
-                                <option value="all">Mọi giá</option>
-                                <option value="0-50">Dưới 50k</option>
-                                <option value="50-100">50k - 100k</option>
-                                <option value="100-200">100k - 200k</option>
-                                <option value="200+">Trên 200k</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Menu Grid -->
-                <div id="menuGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-                    <!-- Menu items will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- ALBUM SECTION -->
-        <section id="album-section" class="section-hidden">
-            <div id="album-content"></div>
-        </section>
-
-        <!-- BOOKING SECTION -->
-        <section id="booking-section" class="section-hidden">
-            <div id="booking-content"></div>
-        </section>
-
-        <!-- CONTACT SECTION -->
-        <section id="contact-section" class="section-hidden">
-            <div id="contact-content"></div>
-        </section>
-
-        <!-- ADMIN SECTION -->
-        <section id="admin-section" class="section-hidden">
-            <div id="admin-panel-container"></div>
-        </section>
     </main>
 
     <!-- Footer Component -->

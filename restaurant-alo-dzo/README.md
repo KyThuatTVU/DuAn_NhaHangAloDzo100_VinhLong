@@ -1,14 +1,19 @@
 # Ẩm Thực Phương Nam - Website Nhà Hàng
 
 ## Tổng quan
-Website nhà hàng Ẩm Thực Phương Nam được tái cấu trúc theo mô hình component-based để dễ dàng bảo trì và mở rộng.
+Website nhà hàng Ẩm Thực Phương Nam đã được tái cấu trúc hoàn toàn từ single-page application thành multi-page website với component-based architecture để dễ dàng bảo trì và mở rộng.
 
 ## Cấu trúc dự án
 
 ```
 restaurant-alo-dzo/
-├── index.html              # File HTML gốc (monolithic)
-├── index-new.html          # File HTML mới (component-based)
+├── index.html              # Trang chủ
+├── about.html              # Trang giới thiệu
+├── menu.html               # Trang thực đơn (có search)
+├── album.html              # Trang album ảnh
+├── booking.html            # Trang đặt bàn
+├── contact.html            # Trang liên hệ
+├── admin.html              # Trang quản trị
 ├── README.md               # Tài liệu hướng dẫn
 ├── assets/
 │   ├── css/
@@ -17,19 +22,18 @@ restaurant-alo-dzo/
 │       ├── script.js       # JavaScript chính
 │       └── components.js   # Dữ liệu và template components
 └── components/
-    ├── header.html         # Component header
-    ├── navigation.html     # Component navigation
+    ├── header.html         # Component header (tích hợp navigation)
     ├── footer.html         # Component footer
     ├── menu-item.html      # Component menu item
     ├── modal.html          # Component modal
-    └── admin-panel.html    # Component admin panel
+    ├── admin-panel.html    # Component admin panel
+    └── layout.html         # Template layout chung
 ```
 
 ## Các thành phần chính
 
 ### 1. Components
-- **Header**: Logo, thanh tìm kiếm, menu người dùng
-- **Navigation**: Menu điều hướng chính
+- **Header**: Logo, navigation tích hợp, menu người dùng (responsive)
 - **Footer**: Thông tin liên hệ, liên kết nhanh
 - **Menu Item**: Template tái sử dụng cho món ăn
 - **Modal**: Popup cho chi tiết món ăn, đăng nhập, lightbox

@@ -123,6 +123,24 @@
     color: white;
 }
 
+/* Mobile Menu */
+@media (max-width: 1024px) {
+    #mobileMenu {
+        animation: slideDown 0.3s ease-out;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Pulse Animation */
 .pulse-animation {
     animation: pulse 2s infinite;
