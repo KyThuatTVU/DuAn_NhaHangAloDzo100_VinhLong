@@ -66,6 +66,7 @@ async function initializePage(pageName) {
         updateCartBadge();
         setupEventListeners();
         setActiveNavigation(pageName);
+        showCartButton(pageName);
 
     } catch (error) {
         console.error('Error initializing page:', error);
@@ -78,6 +79,7 @@ function setActiveNavigation(pageName) {
     setTimeout(() => {
         const navItems = document.querySelectorAll('#main-navigation .nav-item');
         const mobileNavItems = document.querySelectorAll('#mobileMenu .nav-item');
+        console.log('setActiveNavigation called for page:', pageName, 'nav items found:', navItems.length);
 
         // Remove active class from all items
         [...navItems, ...mobileNavItems].forEach(item => {
@@ -87,6 +89,7 @@ function setActiveNavigation(pageName) {
 
         // Add active class to current page
         const activeItems = document.querySelectorAll(`[data-page="${pageName}"]`);
+        console.log('Active items found:', activeItems.length);
         activeItems.forEach(item => {
             item.classList.add('nav-active');
             item.classList.remove('hover:bg-gray-100');
@@ -94,32 +97,38 @@ function setActiveNavigation(pageName) {
     }, 100);
 }
 
+// Show/hide cart button based on page
+function showCartButton(pageName) {
+    // Wait for header to load
+    setTimeout(() => {
+        const cartButton = document.getElementById('cartButton');
+        console.log('showCartButton called for page:', pageName, 'cartButton found:', !!cartButton);
+        if (cartButton) {
+            if (pageName === 'menu') {
+                cartButton.classList.remove('hidden');
+                console.log('Cart button shown for menu page');
+            } else {
+                cartButton.classList.add('hidden');
+                console.log('Cart button hidden for page:', pageName);
+            }
+        }
+    }, 100);
+}
+
 // Load common components for all pages
 async function loadCommonComponents() {
     try {
-        // Load Top Bar
-        const topbarResponse = await fetch('components/topbar.html');
-        const topbarHTML = await topbarResponse.text();
-        const topbarContainer = document.getElementById('topbar-container');
-        if (topbarContainer) topbarContainer.innerHTML = topbarHTML;
-
-        // Load Header
-        const headerResponse = await fetch('components/header.html');
+        // Load Header (includes topbar)
+        const headerResponse = await fetch('components/header.html?v=' + Date.now());
         const headerHTML = await headerResponse.text();
         const headerContainer = document.getElementById('header-container');
         if (headerContainer) headerContainer.innerHTML = headerHTML;
 
         // Load Footer
-        const footerResponse = await fetch('components/footer.html');
+        const footerResponse = await fetch('components/footer.html?v=' + Date.now());
         const footerHTML = await footerResponse.text();
         const footerContainer = document.getElementById('footer-container');
         if (footerContainer) footerContainer.innerHTML = footerHTML;
-
-        // Load Cart
-        const cartResponse = await fetch('components/cart.html');
-        const cartHTML = await cartResponse.text();
-        const cartContainer = document.getElementById('cart-container');
-        if (cartContainer) cartContainer.innerHTML = cartHTML;
 
     } catch (error) {
         console.error('Error loading common components:', error);
@@ -148,6 +157,12 @@ async function loadMenuPageComponents() {
         const modalHTML = await modalResponse.text();
         const modalContainer = document.getElementById('modal-container');
         if (modalContainer) modalContainer.innerHTML = modalHTML;
+
+        // Load Cart for menu page
+        const cartResponse = await fetch('components/cart.html');
+        const cartHTML = await cartResponse.text();
+        const cartContainer = document.getElementById('cart-container');
+        if (cartContainer) cartContainer.innerHTML = cartHTML;
 
     } catch (error) {
         console.error('Error loading menu page components:', error);
@@ -204,10 +219,15 @@ async function loadBasicPageComponents() {
 
 // Setup functions for each page type
 function setupHomePage() {
+    // Initialize banner slider
+    setTimeout(() => {
+        initializeBannerSlider();
+    }, 100);
+
     // Render best sellers
     setTimeout(() => {
         renderBestSellers();
-    }, 100);
+    }, 200);
 }
 
 function setupMenuPage() {
@@ -909,4 +929,51 @@ function handleBooking(event) {
 function handleContact(event) {
     event.preventDefault();
     showToast('Tin nhắn đã được gửi! Chúng tôi sẽ phản hồi trong vòng 24 giờ.');
+}
+
+// Banner Slider Functions
+let currentSlide = 0;
+const totalSlides = 3;
+
+function showSlide(index) {
+    const slides = document.querySelectorAll('.banner-slide');
+    const indicators = document.querySelectorAll('.slide-indicator');
+
+    // Hide all slides
+    slides.forEach(slide => slide.classList.remove('active'));
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+
+    // Show current slide
+    if (slides[index]) {
+        slides[index].classList.add('active');
+    }
+    if (indicators[index]) {
+        indicators[index].classList.add('active');
+    }
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+}
+
+function previousSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    showSlide(currentSlide);
+}
+
+// Auto-play banner slider
+function startBannerSlider() {
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+}
+
+// Initialize banner slider
+function initializeBannerSlider() {
+    showSlide(0); // Show first slide
+    startBannerSlider(); // Start auto-play
 }

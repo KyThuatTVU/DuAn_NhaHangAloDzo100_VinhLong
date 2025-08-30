@@ -18,112 +18,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body class="bg-gray-50">
-    <!-- Top Bar -->
-    <div class="bg-brand-primary text-white py-2 text-sm">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <span><i class="fas fa-phone mr-1"></i> 0123-456-789</span>
-                    <span><i class="fas fa-envelope mr-1"></i> info@amthucphuongnam.com</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span>Miễn phí giao hàng cho đơn từ 200k</span>
-                    <i class="fas fa-shipping-fast"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-4">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="index.html" class="flex items-center">
-                        <div class="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center mr-3">
-                            <i class="fas fa-utensils text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-xl font-bold brand-primary">Ẩm Thực Phương Nam</h1>
-                            <p class="text-sm text-gray-600">Đặc sản miền Nam</p>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Navigation -->
-                <nav class="hidden lg:flex space-x-8">
-                    <a href="index.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-home mr-2"></i>Trang chủ
-                    </a>
-                    <a href="about.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-info-circle mr-2"></i>Giới thiệu
-                    </a>
-                    <a href="menu.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-utensils mr-2"></i>Thực đơn
-                    </a>
-                    <a href="album.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-images mr-2"></i>Album
-                    </a>
-                    <a href="booking.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
-                    </a>
-                    <a href="contact.html" class="nav-item nav-active px-3 py-2 rounded font-medium transition-colors">
-                        <i class="fas fa-phone mr-2"></i>Liên hệ
-                    </a>
-                    <a href="admin.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-cog mr-2"></i>Admin
-                    </a>
-                </nav>
-
-                <!-- Right Menu -->
-                <div class="flex items-center space-x-4">
-                    <!-- Mobile Menu Button -->
-                    <button onclick="toggleMobileMenu()" class="lg:hidden text-gray-700 hover:text-brand-primary">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                    
-                    <button onclick="toggleAuth()" class="flex items-center text-gray-700 hover:text-brand-primary">
-                        <i class="fas fa-user mr-2"></i>
-                        <span class="hidden md:block">Đăng nhập</span>
-                    </button>
-                    
-                    <button onclick="toggleCart()" class="relative flex items-center text-gray-700 hover:text-brand-primary">
-                        <i class="fas fa-shopping-cart mr-2"></i>
-                        <span class="hidden md:block">Giỏ hàng</span>
-                        <span id="cartBadge" class="absolute -top-2 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div id="mobileMenu" class="lg:hidden border-t border-gray-200 hidden">
-                <div class="py-4 space-y-2">
-                    <a href="index.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-home mr-2"></i>Trang chủ
-                    </a>
-                    <a href="about.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-info-circle mr-2"></i>Giới thiệu
-                    </a>
-                    <a href="menu.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-utensils mr-2"></i>Thực đơn
-                    </a>
-                    <a href="album.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-images mr-2"></i>Album
-                    </a>
-                    <a href="booking.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
-                    </a>
-                    <a href="contact.html" class="nav-item nav-active w-full text-left px-3 py-2 rounded font-medium transition-colors block">
-                        <i class="fas fa-phone mr-2"></i>Liên hệ
-                    </a>
-                    <a href="admin.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-cog mr-2"></i>Admin
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- Header Component (includes topbar) -->
+    <div id="header-container"></div>
 
     <!-- Main Content -->
     <main>
@@ -231,89 +127,14 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center mr-3">
-                            <i class="fas fa-utensils text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Ẩm Thực Phương Nam</h3>
-                    </div>
-                    <p class="text-gray-400 mb-4">Hương vị đặc sản miền Nam - Giao hàng tận nơi</p>
-                    <div class="space-y-2">
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            <span class="text-sm text-gray-400">123 Nguyễn Huệ, Q.1, TP.HCM</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-phone mr-2"></i>
-                            <span class="text-sm text-gray-400">0123-456-789</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span class="text-sm text-gray-400">info@amthucphuongnam.com</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
 
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Liên kết nhanh</h4>
-                    <ul class="space-y-2">
-                        <li><a href="about.html" class="text-gray-400 hover:text-white">Giới thiệu</a></li>
-                        <li><a href="menu.html" class="text-gray-400 hover:text-white">Thực đơn</a></li>
-                        <li><a href="booking.html" class="text-gray-400 hover:text-white">Đặt bàn</a></li>
-                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Liên hệ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Chính sách bảo mật</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Điều khoản sử dụng</a></li>
-                    </ul>
-                </div>
-
-                <!-- Services -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Dịch vụ</h4>
-                    <ul class="space-y-2">
-                        <li><span class="text-gray-400">Ăn tại chỗ</span></li>
-                        <li><span class="text-gray-400">Giao hàng tận nơi</span></li>
-                        <li><span class="text-gray-400">Đặt tiệc</span></li>
-                        <li><span class="text-gray-400">Catering</span></li>
-                        <li><span class="text-gray-400">Đặt bàn online</span></li>
-                    </ul>
-                </div>
-
-                <!-- Social Media -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Mạng xã hội</h4>
-                    <div class="flex space-x-4 mb-4">
-                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center hover:bg-pink-600">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                    <p class="text-gray-400 text-sm">Theo dõi để cập nhật khuyến mãi mới nhất!</p>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-400">© 2023 Ẩm Thực Phương Nam. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
 
     <!-- JavaScript -->
-    <script src="assets/js/script.js"></script>
     <script src="assets/js/components.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

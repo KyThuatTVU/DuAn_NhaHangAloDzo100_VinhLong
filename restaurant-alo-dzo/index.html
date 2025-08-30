@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Trang chủ - Ẩm Thực Phương Nam</title>
     <meta name="description" content="Nhà hàng Ẩm Thực Phương Nam - Đặc sản miền Nam, đặt bàn online, giao hàng tận nơi">
     <meta property="og:title" content="Trang chủ - Ẩm Thực Phương Nam">
@@ -18,139 +21,82 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body class="bg-gray-50">
-    <!-- Top Bar -->
-    <div class="bg-brand-primary text-white py-2 text-sm">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <span><i class="fas fa-phone mr-1"></i> 0123-456-789</span>
-                    <span><i class="fas fa-envelope mr-1"></i> info@amthucphuongnam.com</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span>Miễn phí giao hàng cho đơn từ 200k</span>
-                    <i class="fas fa-shipping-fast"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-4">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="index.html" class="flex items-center">
-                        <div class="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center mr-3">
-                            <i class="fas fa-utensils text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-xl font-bold brand-primary">Ẩm Thực Phương Nam</h1>
-                            <p class="text-sm text-gray-600">Đặc sản miền Nam</p>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Navigation -->
-                <nav class="hidden lg:flex space-x-8">
-                    <a href="index.html" class="nav-item nav-active px-3 py-2 rounded font-medium transition-colors">
-                        <i class="fas fa-home mr-2"></i>Trang chủ
-                    </a>
-                    <a href="about.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-info-circle mr-2"></i>Giới thiệu
-                    </a>
-                    <a href="menu.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-utensils mr-2"></i>Thực đơn
-                    </a>
-                    <a href="album.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-images mr-2"></i>Album
-                    </a>
-                    <a href="booking.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
-                    </a>
-                    <a href="contact.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-phone mr-2"></i>Liên hệ
-                    </a>
-                    <a href="admin.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-cog mr-2"></i>Admin
-                    </a>
-                </nav>
-
-                <!-- Right Menu -->
-                <div class="flex items-center space-x-4">
-                    <!-- Mobile Menu Button -->
-                    <button onclick="toggleMobileMenu()" class="lg:hidden text-gray-700 hover:text-brand-primary">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-
-                    <button onclick="toggleAuth()" class="flex items-center text-gray-700 hover:text-brand-primary">
-                        <i class="fas fa-user mr-2"></i>
-                        <span class="hidden md:block">Đăng nhập</span>
-                    </button>
-
-                    <button onclick="toggleCart()" class="relative flex items-center text-gray-700 hover:text-brand-primary">
-                        <i class="fas fa-shopping-cart mr-2"></i>
-                        <span class="hidden md:block">Giỏ hàng</span>
-                        <span id="cartBadge" class="absolute -top-2 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div id="mobileMenu" class="lg:hidden border-t border-gray-200 hidden">
-                <div class="py-4 space-y-2">
-                    <a href="index.html" class="nav-item nav-active w-full text-left px-3 py-2 rounded font-medium transition-colors block">
-                        <i class="fas fa-home mr-2"></i>Trang chủ
-                    </a>
-                    <a href="about.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-info-circle mr-2"></i>Giới thiệu
-                    </a>
-                    <a href="menu.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-utensils mr-2"></i>Thực đơn
-                    </a>
-                    <a href="album.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-images mr-2"></i>Album
-                    </a>
-                    <a href="booking.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-calendar-alt mr-2"></i>Đặt bàn
-                    </a>
-                    <a href="contact.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-phone mr-2"></i>Liên hệ
-                    </a>
-                    <a href="admin.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block">
-                        <i class="fas fa-cog mr-2"></i>Admin
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- Header Component (includes topbar) -->
+    <div id="header-container"></div>
 
     <!-- Main Content -->
     <main>
         <!-- HOME SECTION -->
         <section id="home-section" class="section-visible">
-            <!-- Hero Banner -->
-            <div class="relative h-96 overflow-hidden">
-                <div class="absolute inset-0 gradient-overlay"></div>
-                <div class="absolute inset-0 flex items-center justify-center text-white text-center">
-                    <div class="fade-in">
-                        <h1 class="text-5xl font-bold mb-4">Ẩm Thực Phương Nam</h1>
-                        <p class="text-xl mb-8">Hương vị đặc sản miền Nam - Giao hàng tận nơi</p>
-                        <div class="space-x-4">
-                            <a href="menu.html" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
-                                Xem thực đơn
-                            </a>
-                            <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors inline-block">
-                                Đặt bàn ngay
-                            </a>
+            <!-- Hero Banner Slider -->
+            <div class="relative h-96 overflow-hidden banner-container">
+                <!-- Slide 1 -->
+                <div class="banner-slide active absolute inset-0" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/TomSot.jpg'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 flex items-center justify-center text-white text-center">
+                        <div class="fade-in">
+                            <h1 class="text-5xl font-bold mb-4">Ẩm Thực Phương Nam</h1>
+                            <p class="text-xl mb-8">Hương vị đặc sản miền Nam - Giao hàng tận nơi</p>
+                            <div class="space-x-4">
+                                <a href="menu.html" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
+                                    Xem thực đơn
+                                </a>
+                                <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors inline-block">
+                                    Đặt bàn ngay
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Slide 2 -->
+                <div class="banner-slide absolute inset-0" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/chagioPN.jpg'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 flex items-center justify-center text-white text-center">
+                        <div class="fade-in">
+                            <h1 class="text-5xl font-bold mb-4">Chả Giò Đặc Biệt</h1>
+                            <p class="text-xl mb-8">Giòn tan, thơm ngon - Công thức truyền thống</p>
+                            <div class="space-x-4">
+                                <a href="menu.html" class="bg-yellow-500 text-white px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
+                                    Đặt ngay
+                                </a>
+                                <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-yellow-500 transition-colors inline-block">
+                                    Tìm hiểu thêm
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="banner-slide absolute inset-0" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/CaNuong.jpg'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 flex items-center justify-center text-white text-center">
+                        <div class="fade-in">
+                            <h1 class="text-5xl font-bold mb-4">Cà Nướng Phương Nam</h1>
+                            <p class="text-xl mb-8">Hương vị đậm đà - Nướng than hoa truyền thống</p>
+                            <div class="space-x-4">
+                                <a href="menu.html" class="bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
+                                    Thử ngay
+                                </a>
+                                <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-500 transition-colors inline-block">
+                                    Đặt bàn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
                 <!-- Carousel Indicators -->
                 <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                    <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
-                    <div class="w-3 h-3 bg-white rounded-full"></div>
-                    <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+                    <div class="slide-indicator w-3 h-3 bg-white rounded-full cursor-pointer active" onclick="goToSlide(0)"></div>
+                    <div class="slide-indicator w-3 h-3 bg-white rounded-full opacity-50 cursor-pointer" onclick="goToSlide(1)"></div>
+                    <div class="slide-indicator w-3 h-3 bg-white rounded-full opacity-50 cursor-pointer" onclick="goToSlide(2)"></div>
                 </div>
             </div>
 
@@ -185,21 +131,67 @@
                 </div>
             </div>
 
-          
+            <!-- Promotional Banner -->
+            <div class="relative overflow-hidden my-8">
+                <div class="bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 text-white py-16">
+                    <div class="container mx-auto px-4">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            <!-- Left Content -->
+                            <div class="text-center lg:text-left">
+                                <div class="inline-block bg-yellow-400 text-red-600 px-4 py-2 rounded-full text-sm font-bold mb-4 animate-bounce shimmer-effect promo-banner-title">
+                                    🔥 KHUYẾN MÃI ĐẶC BIỆT
+                                </div>
+                                <h2 class="text-4xl lg:text-5xl font-bold mb-4 promo-banner-subtitle">
+                                    Giảm <span class="gradient-text">30%</span>
+                                </h2>
+                                <h3 class="text-2xl lg:text-3xl font-semibold mb-4 promo-banner-subtitle">
+                                    Combo Gia Đình
+                                </h3>
+                                <p class="text-lg mb-6 opacity-90 promo-banner-description">
+                                    Thưởng thức trọn vẹn hương vị miền Nam với combo dành cho 4-6 người.
+                                    Bao gồm: Cơm tấm, Bánh xèo, Chả giò + 2 nước uống
+                                </p>
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start promo-banner-buttons">
+                                    <a href="menu.html" class="bg-yellow-400 text-red-600 px-8 py-4 rounded-lg font-bold text-lg btn-glow hover:bg-yellow-300 transition-all inline-block">
+                                        <i class="fas fa-shopping-cart mr-2"></i>
+                                        Đặt ngay - Chỉ 299K
+                                    </a>
+                                    <a href="tel:0123456789" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-red-500 transition-all inline-block">
+                                        <i class="fas fa-phone mr-2"></i>
+                                        Gọi đặt hàng
+                                    </a>
+                                </div>
+                                <div class="mt-4 text-sm opacity-75 promo-banner-description">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Khuyến mãi có hạn đến 31/12/2024
+                                </div>
+                            </div>
 
-            <!-- CTA Section -->
-            <div class="bg-brand-primary text-white py-12">
-                <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-3xl font-bold mb-4">Đặt hàng ngay hôm nay!</h2>
-                    <p class="text-xl mb-8">Giao hàng miễn phí cho đơn từ 200k trong bán kính 5km</p>
-                    <div class="flex justify-center space-x-4">
-                        <a href="menu.html" class="bg-white text-brand-primary px-8 py-3 rounded-lg font-semibold hover-scale inline-block">
-                            Đặt món ngay
-                        </a>
-                        <a href="booking.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-brand-primary transition-colors inline-block">
-                            Đặt bàn trước
-                        </a>
+                            <!-- Right Image -->
+                            <div class="relative promo-banner-image">
+                                <div class="relative z-10">
+                                    <img src="images/TomSot.jpg" alt="Combo Gia Đình" class="rounded-2xl shadow-2xl w-full max-w-md mx-auto lg:max-w-full hover-scale">
+                                    <div class="absolute -top-4 -right-4 bg-yellow-400 text-red-600 w-20 h-20 rounded-full flex items-center justify-center font-bold text-lg shadow-lg animate-bounce">
+                                        -30%
+                                    </div>
+                                </div>
+                                <!-- Decorative elements -->
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-300 rounded-full opacity-20 -z-10 float-element"></div>
+                                <div class="absolute bottom-0 left-0 w-24 h-24 bg-pink-300 rounded-full opacity-20 -z-10 float-element"></div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Floating elements -->
+                <div class="absolute top-10 left-10 text-yellow-300 text-2xl float-element">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="absolute top-20 right-20 text-yellow-300 text-xl float-element" style="animation-delay: 0.5s;">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="absolute bottom-10 left-20 text-yellow-300 text-lg float-element" style="animation-delay: 1s;">
+                    <i class="fas fa-utensils"></i>
                 </div>
             </div>
 
@@ -219,14 +211,14 @@
                                 <div class="bg-white text-red-500 px-2 py-1 rounded font-bold">42</div>
                             </div>
                         </div>
-                        <button onclick="showSection('menu')" class="bg-white text-red-500 px-6 py-2 rounded-lg font-semibold hover-scale">
+                        <a href="menu.html" class="bg-white text-red-500 px-6 py-2 rounded-lg font-semibold hover-scale">
                             Xem tất cả
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Best Sellers -->
+          <!-- Best Sellers -->
 <div class="container mx-auto px-4 py-12">
     <h2 class="text-3xl font-bold text-center mb-8 brand-primary">Món ăn bán chạy</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -285,7 +277,7 @@
 
         <!-- Món 3 -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-scale diamond-rounded">
-            <div class="relative">
+<div class="relative">
                 <img src="images/CaNuong.jpg" alt="Cà nướng Phương Nam" class="w-full h-48 object-cover">
             </div>
             <div class="p-4">
@@ -376,6 +368,64 @@
                 </div>
             </div>
 
+           
+         
+
+            <!-- Newsletter Banner -->
+            <div class="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white py-16">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <!-- Left Content -->
+                        <div class="text-center lg:text-left">
+                            <div class="inline-block bg-yellow-400 text-blue-800 px-4 py-2 rounded-full text-sm font-bold mb-4 shimmer-effect newsletter-title">
+                                📧 ĐĂNG KÝ NGAY
+                            </div>
+                            <h2 class="text-4xl lg:text-5xl font-bold mb-4 newsletter-title">
+                                Nhận <span class="gradient-text">Voucher 50K</span>
+                            </h2>
+                            <p class="text-xl mb-6 opacity-90 newsletter-form">
+                                Đăng ký nhận tin để được thông báo về các chương trình khuyến mãi đặc biệt và món ăn mới nhất
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto lg:mx-0 newsletter-form">
+                                <input type="email" placeholder="Nhập email của bạn..." class="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400 hover-scale">
+                                <button class="bg-yellow-400 text-blue-800 px-6 py-3 rounded-lg font-bold btn-glow hover:bg-yellow-300 transition-all">
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                    Đăng ký
+                                </button>
+                            </div>
+                            <p class="text-sm opacity-75 mt-3 newsletter-form">
+                                <i class="fas fa-shield-alt mr-1"></i>
+                                Chúng tôi cam kết bảo mật thông tin của bạn
+                            </p>
+                        </div>
+
+                        <!-- Right Image -->
+                        <div class="relative text-center promo-banner-image">
+                            <div class="relative z-10 max-w-sm mx-auto">
+                                <img src="images/GoiTep.jpg" alt="Voucher 50K" class="rounded-2xl shadow-2xl w-full hover-scale">
+                                <div class="absolute -top-4 -right-4 bg-yellow-400 text-blue-800 w-24 h-24 rounded-full flex items-center justify-center font-bold text-lg shadow-lg pulse-animation">
+                                    50K<br><span class="text-sm">OFF</span>
+                                </div>
+                            </div>
+                            <!-- Decorative elements -->
+                            <div class="absolute top-0 left-0 w-32 h-32 bg-yellow-300 rounded-full opacity-20 float-element"></div>
+                            <div class="absolute bottom-0 right-0 w-24 h-24 bg-purple-300 rounded-full opacity-20 float-element"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating icons -->
+                <div class="absolute top-10 left-10 text-yellow-300 text-2xl float-element">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="absolute top-20 right-20 text-yellow-300 text-xl float-element" style="animation-delay: 0.5s;">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="absolute bottom-10 left-20 text-yellow-300 text-lg float-element" style="animation-delay: 1s;">
+                    <i class="fas fa-percent"></i>
+                </div>
+            </div>
+
             <!-- CTA Section -->
             <div class="bg-brand-primary text-white py-12">
                 <div class="container mx-auto px-4 text-center">
@@ -396,44 +446,11 @@
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
-    <!-- Shopping Cart Slide-over -->
-    <div id="cartOverlay" class="overlay fixed inset-0 z-40"></div>
-    <div id="cartSlide" class="cart-slide fixed right-0 top-0 h-full w-96 bg-white shadow-xl z-50 p-6">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-xl font-bold">Giỏ hàng</h2>
-            <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-        </div>
-
-        <div id="cartItems" class="space-y-4 mb-6 max-h-96 overflow-y-auto">
-            <!-- Cart items will be populated by JavaScript -->
-        </div>
-
-        <div class="border-t pt-4">
-            <div class="flex justify-between items-center mb-4">
-                <span class="font-semibold">Tổng cộng:</span>
-                <span id="cartTotal" class="text-xl font-bold text-red-500">0đ</span>
-            </div>
-            
-            <div class="space-y-2">
-                <input type="text" placeholder="Mã giảm giá" class="w-full border border-gray-300 rounded-lg px-3 py-2">
-                <button class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300">
-                    Áp dụng mã
-                </button>
-            </div>
-            
-            <button onclick="checkout()" class="w-full bg-brand-primary text-white py-3 rounded-lg font-semibold mt-4 hover:bg-blue-600">
-                <i class="fas fa-credit-card mr-2"></i>Thanh toán VNPAY
-            </button>
-        </div>
-    </div>
-
     <!-- Modal Container -->
     <div id="modal-container"></div>
 
     <!-- JavaScript -->
-    <script src="assets/js/script.js"></script>
     <script src="assets/js/components.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

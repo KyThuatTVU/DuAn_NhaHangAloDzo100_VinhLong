@@ -1,4 +1,4 @@
-<!-- Top Bar -->
+<!-- Top Bar - Updated 2024 -->
 <div class="bg-brand-primary text-white py-2 text-sm">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center">
@@ -51,9 +51,6 @@
                 <a href="contact.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="contact">
                     <i class="fas fa-phone mr-2"></i>Liên hệ
                 </a>
-                <a href="admin.html" class="nav-item px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors" data-page="admin">
-                    <i class="fas fa-cog mr-2"></i>Admin
-                </a>
             </nav>
 
             <!-- Right Menu -->
@@ -68,7 +65,7 @@
                     <span class="hidden md:block">Đăng nhập</span>
                 </button>
 
-                <button onclick="toggleCart()" class="relative flex items-center text-gray-700 hover:text-brand-primary">
+                <button id="cartButton" onclick="toggleCart()" class="relative flex items-center text-gray-700 hover:text-brand-primary hidden">
                     <i class="fas fa-shopping-cart mr-2"></i>
                     <span class="hidden md:block">Giỏ hàng</span>
                     <span id="cartBadge" class="absolute -top-2 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
@@ -96,9 +93,6 @@
                 </a>
                 <a href="contact.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="contact">
                     <i class="fas fa-phone mr-2"></i>Liên hệ
-                </a>
-                <a href="admin.html" class="nav-item w-full text-left px-3 py-2 rounded font-medium hover:bg-gray-100 transition-colors block" data-page="admin">
-                    <i class="fas fa-cog mr-2"></i>Admin
                 </a>
             </div>
         </div>

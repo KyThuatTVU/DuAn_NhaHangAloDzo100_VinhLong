@@ -195,3 +195,208 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-2px); }
 }
+
+/* Banner Slider */
+.banner-slide {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.banner-slide.active {
+    opacity: 1;
+}
+
+.slide-indicator {
+    cursor: pointer;
+}
+
+.slide-indicator.active {
+    opacity: 1 !important;
+    background-color: #fff;
+}
+
+/* Banner Animation */
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.banner-slide.slide-in {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Enhanced Banner Styles */
+.banner-container {
+    position: relative;
+    background: linear-gradient(45deg, #0A4A7A, #8B4513);
+}
+
+.banner-slide {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    background-attachment: fixed !important;
+}
+
+.banner-slide.active {
+    opacity: 1;
+}
+
+/* Promotional Banner Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6); }
+}
+
+.glow-effect {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Responsive Banner Text */
+@media (max-width: 768px) {
+    .banner-slide h1 {
+        font-size: 2.5rem !important;
+    }
+
+    .banner-slide p {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .banner-slide h1 {
+        font-size: 2rem !important;
+    }
+
+    .banner-slide .space-x-4 {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .banner-slide .space-x-4 > * {
+        margin: 0 !important;
+    }
+}
+
+/* Advanced Banner Animations */
+@keyframes slideInFromLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    0% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: calc(200px + 100%) 0; }
+}
+
+.shimmer-effect {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Promotional Banner Enhanced Styles */
+.promo-banner-title {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+.promo-banner-subtitle {
+    animation: slideInFromLeft 0.8s ease-out 0.2s both;
+}
+
+.promo-banner-description {
+    animation: slideInFromLeft 0.8s ease-out 0.4s both;
+}
+
+.promo-banner-buttons {
+    animation: slideInFromTop 0.8s ease-out 0.6s both;
+}
+
+.promo-banner-image {
+    animation: slideInFromRight 0.8s ease-out 0.3s both;
+}
+
+/* Newsletter Banner Animations */
+.newsletter-title {
+    animation: zoomIn 0.8s ease-out;
+}
+
+.newsletter-form {
+    animation: slideInFromTop 0.8s ease-out 0.4s both;
+}
+
+/* Floating Elements Animation */
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(2deg); }
+    50% { transform: translateY(-5px) rotate(-1deg); }
+    75% { transform: translateY(-15px) rotate(1deg); }
+}
+
+.float-element {
+    animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.float-element:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.float-element:nth-child(3) {
+    animation-delay: 2s;
+}
+
+/* Gradient Text Effect */
+.gradient-text {
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Button Hover Effects */
+.btn-glow:hover {
+    box-shadow: 0 0 20px rgba(255, 212, 0, 0.6);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Responsive Promotional Banners */
+@media (max-width: 768px) {
+    .promo-banner-title {
+        font-size: 2.5rem !important;
+    }
+
+    .newsletter-title {
+        font-size: 2.5rem !important;
+    }
+
+    .promo-banner-buttons,
+    .newsletter-form {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
